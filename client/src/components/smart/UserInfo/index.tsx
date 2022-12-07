@@ -1,22 +1,25 @@
 import React from 'react';
 import UserInfoList from "./UserInfoList";
 import UserInfoItem from "./UserInfoItem";
+import {useAppSelector} from "../../../hooks/useAppSelector";
 
 const UserInfo = () => {
+    const {uuid} = useAppSelector(state => state.user)
+
     return (
         <UserInfoList>
            <UserInfoItem>
-               Имя: 123 (статика)
+               Имя (статика): 123
            </UserInfoItem>
             <UserInfoItem>
-               Группа: КС-44 (статика)
+               Группа (статика): КС-44
             </UserInfoItem>
             <UserInfoItem>
-                Курс: 4 (статика)
+                Курс (статика): 4
             </UserInfoItem>
             <UserInfoItem>
                 <b>
-                    UUID: 123123 (ПОЗЖЕ УДАЛИТЬ)
+                    UUID (ПОЗЖЕ УДАЛИТЬ): {uuid}
                 </b>
             </UserInfoItem>
         </UserInfoList>
