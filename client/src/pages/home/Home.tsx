@@ -1,8 +1,8 @@
 import React from 'react';
-import CenterWrap from "../components/simple/CenterWrap";
-import PageWrap from "../components/simple/PageWrap";
-import UserInfo from "../components/smart/UserInfo";
-import CheckUserButton from "../components/smart/CheckUserButton";
+import CenterWrap from "../../components/simple/CenterWrap";
+import PageWrap from "../../components/simple/Page";
+import UserInfo from "../../components/smart/UserInfo";
+import CheckUserButton from "../../components/smart/CheckUserButton";
 
 const Home = () => {
     return (
