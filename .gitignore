@@ -8,6 +8,10 @@
 */lerna-debug.log*
 
 */client/node_modules
+*/server/node_modules
+*/server/dist
+*/server/.idea
+*/server/.yarn
 */dist
 */dist-ssr
 */*.local
