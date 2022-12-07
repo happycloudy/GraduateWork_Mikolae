@@ -1,9 +1,9 @@
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import {routes} from "./constants/routes";
+import "./styles/global.css"
+
 function App() {
-  return(
-      <div>
-          123
-      </div>
-  )
+    return <RouterProvider router={createBrowserRouter(routes)}/>
 }
 
 export default App
