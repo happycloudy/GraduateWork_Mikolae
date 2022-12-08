@@ -9,19 +9,13 @@ export class Student {
   name: string;
 
   @Prop()
-  group: number;
+  group: string;
 
   @Prop()
-  course: string;
+  course: number;
 
   @Prop()
   uuid: string;
-
-  @Prop()
-  serverUuid: string;
-
-  @Prop()
-  deviceUuid: string;
 }
 
 export const StudentSchema = SchemaFactory.createForClass(Student);
