@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { TeachersService } from './teachers.service';
-import { LocalAuthGuard } from '../auth/local-auth.guard';
+import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
 import { CreateTeacherDto } from '../../schemas/dto/create-teacher.dto';
 
 @Controller('teachers')
