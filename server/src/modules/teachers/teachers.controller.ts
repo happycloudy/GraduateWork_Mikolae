@@ -1,7 +1,15 @@
-import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { TeachersService } from './teachers.service';
 import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
-import { CreateTeacherDto } from '../../schemas/dto/create-teacher.dto';
+import { CreateTeacherDto } from './dto/create-teacher.dto';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('teachers')
 export class TeachersController {
@@ -16,5 +24,11 @@ export class TeachersController {
   @Post()
   async create(@Body() createTeacherDto: CreateTeacherDto) {
     return this.teachersService.create(createTeacherDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/students')
+  getStudents() {
+    return this.teachersService.getStudents();
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Teacher, TeacherDocument } from '../../schemas/teachers.schema';
 import { Model } from 'mongoose';
-import { CreateTeacherDto } from '../../schemas/dto/create-teacher.dto';
+import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -31,5 +31,9 @@ export class TeachersService {
     return {
       access_token: this.jwtService.sign(payload),
     };
+  }
+
+  async getStudents() {
+    return 1;
   }
 }

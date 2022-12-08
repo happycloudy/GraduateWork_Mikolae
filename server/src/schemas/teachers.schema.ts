@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Schema as MongooseSchema } from 'mongoose';
+import { Lesson } from './lesson.schema';
 
 export type TeacherDocument = HydratedDocument<Teacher>;
 
@@ -13,6 +14,9 @@ export class Teacher {
 
   @Prop()
   password: string;
+
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Lesson' })
+  lessons: Lesson[];
 }
 
 export const TeacherSchema = SchemaFactory.createForClass(Teacher);

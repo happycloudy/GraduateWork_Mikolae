@@ -5,12 +5,14 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { StudentsModule } from './modules/students/students.module';
 import { TeachersModule } from './modules/teachers/teachers.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { LessonsModule } from './modules/lessons/lessons.module';
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost/graduateApp'),
     StudentsModule,
     TeachersModule,
+    LessonsModule,
     AuthModule,
   ],
   controllers: [AppController],
