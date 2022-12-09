@@ -17,4 +17,21 @@ export class LessonsService {
   async create(createLessonDto: CreateLessonDto) {
     return this.lessonModel.create(createLessonDto);
   }
+
+  async addTeacher(teacherId: string, lessonId: any) {
+    return this.lessonModel.findOneAndUpdate(
+      {
+        _id: lessonId,
+      },
+      {
+        teacher: teacherId,
+      },
+    );
+  }
+
+  async findOne(id) {
+    return this.lessonModel.findOne({
+      _id: id,
+    });
+  }
 }

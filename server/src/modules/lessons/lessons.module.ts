@@ -10,5 +10,6 @@ import { Lesson, LessonSchema } from '../../schemas/lesson.schema';
   ],
   controllers: [LessonsController],
   providers: [LessonsService],
+  exports: [LessonsService],
 })
 export class LessonsModule {}

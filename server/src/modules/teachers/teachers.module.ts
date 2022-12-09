@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Teacher, TeacherSchema } from '../../schemas/teachers.schema';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from '../auth/constants';
+import { LessonsModule } from '../lessons/lessons.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { jwtConstants } from '../auth/constants';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '1h' },
     }),
+    LessonsModule,
   ],
   controllers: [TeachersController],
   providers: [TeachersService],

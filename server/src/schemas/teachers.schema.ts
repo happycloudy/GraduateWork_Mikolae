@@ -15,7 +15,10 @@ export class Teacher {
   @Prop()
   password: string;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Lesson' })
+  @Prop({
+    type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Lesson' }],
+    default: [],
+  })
   lessons: Lesson[];
 }
 

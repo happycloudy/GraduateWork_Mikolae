@@ -10,6 +10,7 @@ import { TeachersService } from './teachers.service';
 import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AddTeachersLessonDto } from './dto/add-teachers-lesson.dto';
 
 @Controller('teachers')
 export class TeachersController {
@@ -30,5 +31,10 @@ export class TeachersController {
   @Get('/students')
   getStudents() {
     return this.teachersService.getStudents();
+  }
+
+  @Post('lessons/add_existing')
+  addTeachersLesson(@Body() addTeacherLessonDto: AddTeachersLessonDto) {
+    return this.teachersService.addTeachersLesson(addTeacherLessonDto);
   }
 }
