@@ -7,15 +7,16 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { TeachersService } from './teachers.service';
-import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { AddTeachersLessonDto } from './dto/add-teachers-lesson.dto';
+import { Public } from '../auth/decorators/public.decorator';
+import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
 
 @Controller('teachers')
 export class TeachersController {
   constructor(private readonly teachersService: TeachersService) {}
 
+  @Public()
   @UseGuards(LocalAuthGuard)
   @Post('/signin')
   async signIn(@Request() req) {
@@ -27,7 +28,6 @@ export class TeachersController {
     return this.teachersService.create(createTeacherDto);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('/students')
   getStudents() {
     return this.teachersService.getStudents();
