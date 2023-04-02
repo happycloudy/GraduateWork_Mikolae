@@ -5,6 +5,9 @@ export type StudentDocument = HydratedDocument<Student>;
 
 @Schema()
 export class Student {
+  @Prop({ default: 'student' })
+  role: 'student';
+
   @Prop()
   name: string;
 

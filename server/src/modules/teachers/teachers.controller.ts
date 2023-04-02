@@ -11,14 +11,14 @@ import { TeachersService } from './teachers.service';
 import { CreateTeacherDto } from './dto/create-teacher.dto';
 import { AddTeachersLessonDto } from './dto/add-teachers-lesson.dto';
 import { Public } from '../auth/decorators/public.decorator';
-import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
+import { LocalAuthTeacherGuard } from '../auth/guards/local-auth-teacher.guard';
 
 @Controller('teachers')
 export class TeachersController {
   constructor(private readonly teachersService: TeachersService) {}
 
   @Public()
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(LocalAuthTeacherGuard)
   @Post('/signin')
   async signIn(@Request() req) {
     return this.teachersService.signIn(req.user);

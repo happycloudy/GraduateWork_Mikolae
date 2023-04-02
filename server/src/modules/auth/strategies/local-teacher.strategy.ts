@@ -4,7 +4,10 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 
 @Injectable()
-export class LocalStrategy extends PassportStrategy(Strategy) {
+export class LocalTeacherStrategy extends PassportStrategy(
+  Strategy,
+  'local-teacher',
+) {
   constructor(private authService: AuthService) {
     super();
   }
