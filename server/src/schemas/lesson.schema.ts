@@ -15,6 +15,9 @@ export class Lesson {
   @Prop()
   course: number;
 
+  @Prop()
+  teacherId: string;
+
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Teacher' })
   teacher: Teacher;
 }

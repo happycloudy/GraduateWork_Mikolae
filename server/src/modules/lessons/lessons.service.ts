@@ -24,7 +24,18 @@ export class LessonsService {
         _id: lessonId,
       },
       {
-        teacher: teacherId,
+        teacherId: teacherId,
+      },
+    );
+  }
+
+  async removeTeacher(lessonId: any) {
+    return this.lessonModel.findOneAndUpdate(
+      {
+        _id: lessonId,
+      },
+      {
+        teacherId: '',
       },
     );
   }

@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Patch,
   Post,
   Request,
   UseGuards,
@@ -33,8 +34,13 @@ export class TeachersController {
     return this.teachersService.getStudents();
   }
 
-  @Post('lessons/add_existing')
+  @Patch('lessons/add')
   addTeachersLesson(@Body() addTeacherLessonDto: AddTeachersLessonDto) {
     return this.teachersService.addTeachersLesson(addTeacherLessonDto);
+  }
+
+  @Patch('lessons/remove')
+  removeTeachersLesson(@Body() removeTeacherLessonDto: AddTeachersLessonDto) {
+    return this.teachersService.removeTeachersLesson(removeTeacherLessonDto);
   }
 }

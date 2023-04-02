@@ -46,21 +46,36 @@ export class TeachersService {
       addTeachersLessonDto.lessonId,
     );
 
-    if (lesson.teacher) {
+    if (lesson.teacherId) {
       return this.teacherModel.findOne({
-        _id: lesson.teacher,
+        _id: lesson.teacherId,
       });
     }
 
     const teacher = await this.teacherModel.findOne({
       _id: addTeachersLessonDto.teacherId,
     });
-    teacher.lessons.push(addTeachersLessonDto.lessonId);
+
+    teacher.lessonsIds.push(addTeachersLessonDto.lessonId);
 
     this.lessonsService.addTeacher(
       addTeachersLessonDto.teacherId,
       addTeachersLessonDto.lessonId,
     );
+
+    return teacher.save();
+  }
+
+  async removeTeachersLesson(removeTeachersLessonDto: AddTeachersLessonDto) {
+    const teacher = await this.teacherModel.findOne({
+      _id: removeTeachersLessonDto.teacherId,
+    });
+
+    teacher.lessonsIds = teacher.lessonsIds.filter(
+      (lesson) => lesson !== removeTeachersLessonDto.lessonId,
+    );
+
+    this.lessonsService.removeTeacher(removeTeachersLessonDto.lessonId);
 
     return teacher.save();
   }
