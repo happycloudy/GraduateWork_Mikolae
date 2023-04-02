@@ -9,8 +9,6 @@ import {
 } from '@nestjs/common';
 import { StudentsService } from './students.service';
 import { CreateStudentDto } from './dto/create-student.dto';
-import { Roles } from '../auth/decorators/roles.decorator';
-import { Role } from '../auth/enums/roles.enum';
 import { Public } from '../auth/decorators/public.decorator';
 import { LocalAuthStudentGuard } from '../auth/guards/local-auth-student.guard';
 
@@ -30,13 +28,14 @@ export class StudentsController {
     return this.studentService.signIn(req.user);
   }
 
+  // @Roles(Role.Teacher)
   @Get('/uuid/:uuid')
   async findOneByUUID(@Param('uuid') uuid: string) {
     return this.studentService.findOneByUUID(uuid);
   }
 
+  @Public()
   @Post()
-  @Roles(Role.Student)
   async create(@Body() createStudentDto: CreateStudentDto) {
     return this.studentService.create(createStudentDto);
   }
