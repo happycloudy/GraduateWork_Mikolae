@@ -1,8 +1,5 @@
-import {createAsyncThunk} from "@reduxjs/toolkit";
-
-export const createUserUUID = createAsyncThunk(
-    'createUserUUID',
-    async (): Promise<string> => new Promise((resolve) => {
+export const getUUIDAsync = async () => {
+    return new Promise((resolve) => {
         import('@fingerprintjs/fingerprintjs')
             .then(FingerprintJS => FingerprintJS.load())
             .then(fp => fp.get())
@@ -11,4 +8,4 @@ export const createUserUUID = createAsyncThunk(
                 resolve(visitorId)
             })
     })
-)
+}

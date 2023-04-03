@@ -1,10 +1,9 @@
 import React from 'react';
 import UserInfoList from "./UserInfoList";
 import UserInfoItem from "./UserInfoItem";
-import {useAppSelector} from "../../../hooks/useAppSelector";
 
 const UserInfo = () => {
-    const {uuid} = useAppSelector(state => state.user)
+    const uuid = 123123
 
     return (
         <UserInfoList>

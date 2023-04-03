@@ -1,6 +1,6 @@
 import React from 'react';
-import Page  from "../../components/simple/Page";
-import CenterWrap from "../../components/simple/CenterWrap";
+import Page  from "../../modules/Stats/components/Page";
+import CenterWrap from "../../modules/Stats/components/CenterWrap";
 
 const Admin = () => {
     return (
