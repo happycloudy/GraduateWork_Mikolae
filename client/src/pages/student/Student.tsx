@@ -4,7 +4,7 @@ import PageWrap from "../../components/simple/Page";
 import UserInfo from "../../components/smart/UserInfo";
 import CheckUserButton from "../../components/smart/CheckUserButton";
 
-const Home = () => {
+const Student = () => {
     return (
         <PageWrap>
             <CenterWrap direction={'column'} style={{height: '100vh'}}>
@@ -18,4 +18,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Student;
