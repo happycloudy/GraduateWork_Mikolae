@@ -1,6 +1,6 @@
 import React, {FormEvent, useEffect} from 'react';
-import {Button} from "../../../Buttons";
-import {FormContent} from "../FormContent/FormContent";
+import {Button} from "../../../Button";
+import {FormContent} from "../../../Form";
 import {useUsersStore} from "../../../../stores/students/students.store";
 import {FormError} from "../FormError/FormError";
 import {Link, useNavigate} from "react-router-dom";

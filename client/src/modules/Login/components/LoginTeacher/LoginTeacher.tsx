@@ -1,5 +1,5 @@
 import React, {FormEvent} from 'react';
-import {FormContent} from "../FormContent/FormContent";
+import {FormContent} from "../../../Form";
 
 const LoginTeacher = () => {
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

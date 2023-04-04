@@ -1,10 +1,10 @@
-import React, {FormEvent, useCallback, useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {Roles} from "../../enums/loginType.enum";
 import {roles} from "../../types/roles";
 import {Select, SelectItem} from "../../../Select";
 import LoginStudent from "../LoginStudent/LoginStudent";
 import LoginTeacher from "../LoginTeacher/LoginTeacher";
-import {FormContainer} from "../FormContainer/FormContainer";
+import {FormContainer} from "../../../Form";
 
 export const Login = () => {
     const [type, setType] = useState<Roles>(Roles.Student)
