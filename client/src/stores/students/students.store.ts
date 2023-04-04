@@ -10,10 +10,12 @@ export const useUsersStore = create<IUsersStore>()(
                 uuid: '',
                 name: '',
                 password: '',
+                accessToken: '',
                 setUUID: async () => {
                     const uuid = await getUUIDAsync() as string
                     set(() => ({uuid: uuid}))
-                }
+                },
+                setAccessToken: (access_token: string) => set(() => ({accessToken: access_token}))
             }),
             {
                 name: 'students-store'

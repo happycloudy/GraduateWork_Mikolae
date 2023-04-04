@@ -12,18 +12,22 @@ export const client = ky.create({
         beforeError: [
             error => {
                 const {response} = error;
+
                 if (response && response.body) {
-                    error.name = 'Ошибка авторизации';
+                    if(response.status === 401) {
+                        error.name = 'Ошибка авторизации';
 
-                    if (typeof error.options.body === "string") {
-                        const body = JSON.parse(error.options.body)
+                        if (typeof error.options.body === "string") {
+                            const body = JSON.parse(error.options.body)
 
-                        if(body.uuid !== undefined) {
-                            error.message = 'Такого студента в базе нету'
-                        } else {
-                            error.message = 'Неправильный логин/пароль'
+                            if(body.uuid !== undefined) {
+                                error.message = 'Такого студента в базе нету'
+                            } else {
+                                error.message = 'Неправильный логин/пароль'
+                            }
                         }
                     }
+
                 }
 
                 return error;

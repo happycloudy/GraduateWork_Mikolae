@@ -1,0 +1,1 @@
+export const getCourse = (group: string) => parseInt(group.at(-2) || '')

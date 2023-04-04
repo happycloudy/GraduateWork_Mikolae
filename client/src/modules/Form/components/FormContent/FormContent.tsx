@@ -4,6 +4,7 @@ export const FormContent = styled.form`
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   
   button {
     margin-top: 10px;

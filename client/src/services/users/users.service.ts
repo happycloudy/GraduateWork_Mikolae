@@ -16,7 +16,7 @@ const usersService = {
     },
 
     registerStudent: async (req: IRegisterStudentRequest): Promise<IRegisterStudentResponse> => {
-        const result = await client.post('students/create', {
+        const result = await client.post('students', {
             json: req,
         })
         return result.json()
@@ -26,3 +26,7 @@ const usersService = {
 
 // Hooks
 export const useLoginStudentMutation = () => useMutation<ILoginStudentResponse, HTTPError, string>(usersService.loginStudent)
+export const useRegisterStudentMutation = () => useMutation<IRegisterStudentResponse,
+    HTTPError,
+    IRegisterStudentRequest
+>(usersService.registerStudent)
