@@ -1,27 +1,22 @@
 import React from 'react';
 import PageLayout from "../../modules/Helpers/components/PageLayout/PageLayout";
 import {Login} from "../../modules/Login";
-import {Col, Divider, Layout, Row} from "antd";
+import {Col, Divider, Row, Space} from "antd";
 
 const LoginPage = () => {
     return (
         <PageLayout>
             <Row align={'middle'} justify={'center'} style={{height: '100%'}}>
-                <div>
+                <Space direction={'vertical'} size={"large"}>
                     <Row justify={"center"}>
-                        <Col>
-                            <h2>
-                                Вход
-                            </h2>
-                        </Col>
+                        <h2>
+                            Вход
+                        </h2>
                     </Row>
-                    <Divider/>
-                    <Row>
-                        <Col >
-                            <Login/>
-                        </Col>
+                    <Row justify={"center"}>
+                        <Login/>
                     </Row>
-                </div>
+                </Space>
             </Row>
         </PageLayout>
     );

@@ -1,15 +1,15 @@
-import React, {FormEvent} from 'react';
-import {FormContent} from "../../../Form";
+import React from 'react';
+import {Form} from "antd";
 
 const LoginTeacher = () => {
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
+    const handleSubmit = () => {
+
     }
 
     return (
-        <FormContent onSubmit={handleSubmit}>
+        <Form onFinish={handleSubmit}>
           Вход для преподавателя
-        </FormContent>
+        </Form>
     );
 };
 

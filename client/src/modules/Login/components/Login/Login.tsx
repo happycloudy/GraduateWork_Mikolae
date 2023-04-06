@@ -21,7 +21,7 @@ export const Login = () => {
     const handleType = (event: RadioChangeEvent) => setType(event.target.value)
 
     return (
-        <Space direction={'vertical'} size={'large'}>
+        <Space direction={'vertical'} size={'small'}>
             <Radio.Group value={type} onChange={handleType}>
                 <Radio.Button value={Roles.Student}>Я студент</Radio.Button>
                 <Radio.Button value={Roles.Teacher}>Я преподаватель</Radio.Button>
