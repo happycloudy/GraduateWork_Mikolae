@@ -1,10 +1,8 @@
-import React, {FormEvent, useEffect} from 'react';
-import {Button} from "../../../Button";
-import {FormContent} from "../../../Form";
+import React, {useEffect} from 'react';
 import {useUserStore} from "../../../../stores/user/user.store";
-import {FormError} from "../FormError/FormError";
 import {Link, useNavigate} from "react-router-dom";
 import {useLoginStudentMutation} from "../../../../services/users/users.service";
+import {Button, Form, Row} from "antd";
 
 const LoginStudent = () => {
     const uuid = useUserStore(state => state.uuid)
@@ -12,37 +10,30 @@ const LoginStudent = () => {
     const mutation = useLoginStudentMutation()
     const navigate = useNavigate()
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        mutation.mutate(uuid)
-    }
+    const handleSubmit = () => mutation.mutate(uuid)
 
     useEffect(() => {
-        if(mutation.isSuccess) {
+        if (mutation.isSuccess) {
             setStudent(mutation.data)
             navigate('/student')
         }
     }, [mutation.isSuccess])
 
     return (
-        <>
-            <FormContent onSubmit={handleSubmit}>
-                {
-                    mutation.isError &&
-                    <>
-                        <FormError>{mutation.error.name}</FormError>
-                        <FormError>{mutation.error.message}</FormError>
-                    </>
-                }
-                <Button type={'submit'}>
-                    Войти как студент
-                </Button>
-                <Link to={'/registration/student'}>
-                    Я в первый раз
-                </Link>
-            </FormContent>
-
-        </>
+        <Form onFinish={handleSubmit}>
+            <Form.Item>
+                <Row justify={"center"}>
+                    <Button htmlType={'submit'} size={'middle'}>
+                        Войти как студент
+                    </Button>
+                </Row>
+                <Row justify={"center"}>
+                    <Link to={'/registration/student'}>
+                        Я в первый раз
+                    </Link>
+                </Row>
+            </Form.Item>
+        </Form>
     );
 };
 

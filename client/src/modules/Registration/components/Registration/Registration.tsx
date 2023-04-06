@@ -1,18 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {FormContainer, FormContent} from "../../../Form";
-import {Input, InputGroup} from "../../../Input";
-import {InputName} from "../../../Input";
-import {useForm} from "react-hook-form";
-import {Button} from "../../../Button";
+import React, {useEffect} from 'react';
 import {useRegisterStudentMutation} from "../../../../services/users/users.service";
 import {getCourse} from "../../../../helpers/getCourse";
 import {useUserStore} from "../../../../stores/user/user.store";
 import {IRegistrationData} from "../../interfaces/RegistrationData.interface";
-import {FormError} from "../../../Login/components/FormError/FormError";
+import {Button, Form, Input, notification, Row, Space} from "antd";
+import {LockOutlined, UserOutlined} from '@ant-design/icons';
 
 const Registration = () => {
-    const [error, setError] = useState<string>('')
-    const {register, handleSubmit} = useForm<IRegistrationData>()
+    const [api, contextHolder] = notification.useNotification();
     const uuid = useUserStore(state => state.uuid)
     const setAccessToken = useUserStore(state => state.setAccessToken)
     const mutation = useRegisterStudentMutation()
@@ -26,44 +21,47 @@ const Registration = () => {
         })
     }
 
+    const openNotificationWithIcon = (title: string) => api.error({message: title});
+
 
     useEffect(() => {
-        if(mutation.isSuccess) {
-            setAccessToken(mutation.data.access_token)
-        }
+        if (mutation.isSuccess) setAccessToken(mutation.data.access_token)
     }, [mutation.isSuccess])
 
     useEffect(() => {
-        if(mutation.isError) {
-            mutation.error.response.json().then(res => {
-                setError(res.message)
-            })
+        if (mutation.isError) {
+            mutation?.error?.response?.json().then(res => {
+                openNotificationWithIcon(res.message)
+            }) || openNotificationWithIcon('Ошибка соединения')
 
         }
     }, [mutation.isError])
 
 
     return (
-        <FormContainer>
-            <FormContent onSubmit={handleSubmit(onSubmit)}>
-                <FormError>
-                    {error}
-                </FormError>
-                <InputGroup>
-                    <InputName>ФИО</InputName>
-                    <Input {...register('name', {required: true})}/>
-                </InputGroup>
+        <Space direction={'vertical'}>
+            <Form onFinish={onSubmit}>
+                {contextHolder}
+                <Form.Item name="username" rules={[{required: true, message: 'Введите ФИО!'}]}>
+                    <Input size={'large'} prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="ФИО"/>
+                </Form.Item>
 
-                <InputGroup>
-                    <InputName>Группа</InputName>
-                    <Input {...register('group', {required: true})}/>
-                </InputGroup>
+                <Form.Item name={'group'} rules={[{required: true, message: 'Введите группу!'}]}>
+                    <Input size={'large'}
+                           prefix={<LockOutlined className="site-form-item-icon"/>}
+                           placeholder="Группа"
+                    />
+                </Form.Item>
 
-                <Button>
-                    Зарегистрироваться
-                </Button>
-            </FormContent>
-        </FormContainer>
+                <Form.Item>
+                    <Row justify={"center"}>
+                        <Button htmlType={'submit'} size={'large'}>
+                            Зарегистрироваться
+                        </Button>
+                    </Row>
+                </Form.Item>
+            </Form>
+        </Space>
     );
 };
 

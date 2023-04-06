@@ -1,10 +1,8 @@
 import React, {useCallback, useState} from 'react';
 import {Roles} from "../../enums/loginType.enum";
-import {roles} from "../../types/roles";
-import {Select, SelectItem} from "../../../Select";
 import LoginStudent from "../LoginStudent/LoginStudent";
 import LoginTeacher from "../LoginTeacher/LoginTeacher";
-import {FormContainer} from "../../../Form";
+import {Radio, RadioChangeEvent, Space} from "antd";
 
 export const Login = () => {
     const [type, setType] = useState<Roles>(Roles.Student)
@@ -20,15 +18,15 @@ export const Login = () => {
     }, [type])
 
 
-    const handleType = (type: Roles) => setType(type)
+    const handleType = (event: RadioChangeEvent) => setType(event.target.value)
 
     return (
-        <FormContainer>
-            <Select currentValue={type} setValue={handleType} values={roles}>
-                <SelectItem onClick={() => handleType(Roles.Student)} active={type === Roles.Student}>Я студент</SelectItem>
-                <SelectItem onClick={() => handleType(Roles.Teacher)} active={type === Roles.Teacher}>Я преподаватель</SelectItem>
-            </Select>
+        <Space direction={'vertical'} size={'large'}>
+            <Radio.Group value={type} onChange={handleType}>
+                <Radio.Button value={Roles.Student}>Я студент</Radio.Button>
+                <Radio.Button value={Roles.Teacher}>Я преподаватель</Radio.Button>
+            </Radio.Group>
             {loginForm()}
-        </FormContainer>
+        </Space>
     );
 };

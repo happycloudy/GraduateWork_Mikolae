@@ -4,6 +4,7 @@ import {ILoginStudentResponse} from "./interfaces/LoginStudentResponse.interface
 import {HTTPError} from "ky";
 import {IRegisterStudentRequest} from "./interfaces/RegisterStudentRequest.interface";
 import {IRegisterStudentResponse} from "./interfaces/RegisterStudentResponse.interface";
+import {handleNetworkError} from "../../helpers/handleNetworkError";
 
 const usersService = {
     loginStudent: async (uuid: string): Promise<ILoginStudentResponse> => {
@@ -12,6 +13,7 @@ const usersService = {
                 uuid
             },
         })
+
         return result.json()
     },
 
@@ -19,6 +21,7 @@ const usersService = {
         const result = await client.post('students', {
             json: req,
         })
+
         return result.json()
     }
 }
