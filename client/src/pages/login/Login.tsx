@@ -1,7 +1,7 @@
 import React from 'react';
 import PageLayout from "../../modules/Helpers/components/PageLayout/PageLayout";
 import {Login} from "../../modules/Login";
-import {Col, Divider, Row, Space} from "antd";
+import {Row, Space} from "antd";
 
 const LoginPage = () => {
     return (
