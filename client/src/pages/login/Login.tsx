@@ -1,18 +1,29 @@
 import React from 'react';
-import PageWrap from "../../modules/Stats/components/Page";
-import CenterWrap from "../../modules/Stats/components/CenterWrap";
+import PageLayout from "../../modules/Helpers/components/PageLayout/PageLayout";
 import {Login} from "../../modules/Login";
+import {Col, Divider, Layout, Row} from "antd";
 
 const LoginPage = () => {
     return (
-        <PageWrap>
-            <CenterWrap direction={'column'} style={{height: '100vh'}}>
-                <h2>
-                    Вход
-                </h2>
-                <Login/>
-            </CenterWrap>
-        </PageWrap>
+        <PageLayout>
+            <Row align={'middle'} justify={'center'} style={{height: '100%'}}>
+                <div>
+                    <Row justify={"center"}>
+                        <Col>
+                            <h2>
+                                Вход
+                            </h2>
+                        </Col>
+                    </Row>
+                    <Divider/>
+                    <Row>
+                        <Col >
+                            <Login/>
+                        </Col>
+                    </Row>
+                </div>
+            </Row>
+        </PageLayout>
     );
 };
 

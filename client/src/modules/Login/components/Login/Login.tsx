@@ -25,8 +25,8 @@ export const Login = () => {
     return (
         <FormContainer>
             <Select currentValue={type} setValue={handleType} values={roles}>
-                <SelectItem onClick={() => handleType(Roles.Student)} active={type === 'Student'}>Я студент</SelectItem>
-                <SelectItem onClick={() => handleType(Roles.Teacher)} active={type === 'Teacher'}>Я преподаватель</SelectItem>
+                <SelectItem onClick={() => handleType(Roles.Student)} active={type === Roles.Student}>Я студент</SelectItem>
+                <SelectItem onClick={() => handleType(Roles.Teacher)} active={type === Roles.Teacher}>Я преподаватель</SelectItem>
             </Select>
             {loginForm()}
         </FormContainer>

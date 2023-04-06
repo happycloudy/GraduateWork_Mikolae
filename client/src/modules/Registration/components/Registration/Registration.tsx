@@ -6,15 +6,15 @@ import {useForm} from "react-hook-form";
 import {Button} from "../../../Button";
 import {useRegisterStudentMutation} from "../../../../services/users/users.service";
 import {getCourse} from "../../../../helpers/getCourse";
-import {useUsersStore} from "../../../../stores/students/students.store";
+import {useUserStore} from "../../../../stores/user/user.store";
 import {IRegistrationData} from "../../interfaces/RegistrationData.interface";
 import {FormError} from "../../../Login/components/FormError/FormError";
 
 const Registration = () => {
     const [error, setError] = useState<string>('')
     const {register, handleSubmit} = useForm<IRegistrationData>()
-    const uuid = useUsersStore(state => state.uuid)
-    const setAccessToken = useUsersStore(state => state.setAccessToken)
+    const uuid = useUserStore(state => state.uuid)
+    const setAccessToken = useUserStore(state => state.setAccessToken)
     const mutation = useRegisterStudentMutation()
 
 

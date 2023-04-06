@@ -1,13 +1,14 @@
 import React, {FormEvent, useEffect} from 'react';
 import {Button} from "../../../Button";
 import {FormContent} from "../../../Form";
-import {useUsersStore} from "../../../../stores/students/students.store";
+import {useUserStore} from "../../../../stores/user/user.store";
 import {FormError} from "../FormError/FormError";
 import {Link, useNavigate} from "react-router-dom";
 import {useLoginStudentMutation} from "../../../../services/users/users.service";
 
 const LoginStudent = () => {
-    const uuid = useUsersStore(state => state.uuid)
+    const uuid = useUserStore(state => state.uuid)
+    const setStudent = useUserStore(state => state.setStudent)
     const mutation = useLoginStudentMutation()
     const navigate = useNavigate()
 
@@ -18,6 +19,7 @@ const LoginStudent = () => {
 
     useEffect(() => {
         if(mutation.isSuccess) {
+            setStudent(mutation.data)
             navigate('/student')
         }
     }, [mutation.isSuccess])

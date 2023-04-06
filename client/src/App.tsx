@@ -1,15 +1,20 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import {routes} from "./constants/routes";
 import {useEffect} from "react";
-import {useUsersStore} from "./stores/students/students.store";
+import {useUserStore} from "./stores/user/user.store";
+import {Layout} from "antd";
 
 
 function App() {
-    const setUUID = useUsersStore(state => state.setUUID)
+    const setUUID = useUserStore(state => state.setUUID)
     useEffect(() => {
         setUUID()
     }, [])
-    return <RouterProvider router={createBrowserRouter(routes)}/>
+    return (
+        <Layout style={{height:"100vh"}}>
+            <RouterProvider router={createBrowserRouter(routes)}/>
+        </Layout>
+    )
 }
 
 export default App
