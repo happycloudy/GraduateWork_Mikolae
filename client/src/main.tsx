@@ -6,10 +6,10 @@ import {QueryClientProvider} from "react-query";
 import {queryClient} from "./services/client";
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
+  // <React.StrictMode>
       <QueryClientProvider client={queryClient}>
           <GlobalStyles/>
           <App />
       </QueryClientProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 )

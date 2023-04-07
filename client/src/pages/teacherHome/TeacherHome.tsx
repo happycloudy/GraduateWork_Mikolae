@@ -1,7 +1,7 @@
 import React from 'react';
 import PageLayout from "../../modules/Helpers/components/PageLayout/PageLayout";
 
-const Admin = () => {
+const TeacherHome = () => {
     return (
         <PageLayout>
             Тут панель преподавателя
@@ -9,4 +9,4 @@ const Admin = () => {
     );
 };
 
-export default Admin;
+export default TeacherHome;

@@ -22,7 +22,7 @@ const LoginTeacher = () => {
     useEffect(() => {
         if (mutation.isSuccess) {
             setUser(mutation.data)
-            navigate('/teacher',{replace: true})
+            navigate('/teacher/home',{replace: true})
         }
     }, [mutation.isSuccess])
 

@@ -18,7 +18,7 @@ export const useUserStore = create<IUserStore>()(
                 course: -1,
                 role: Roles.Student,
                 accessToken: '',
-
+                isAuth: false,
 
                 setUUID: async () => {
                     const uuid = await getUUIDAsync() as string
@@ -30,14 +30,16 @@ export const useUserStore = create<IUserStore>()(
                     role: studentDto.role,
                     group: studentDto.group,
                     course: studentDto.course,
-                    accessToken: studentDto.access_token
+                    accessToken: studentDto.access_token,
+                    isAuth: true
                 })),
                 setTeacher: (studentDto: UserTeacherDto) => set(() => ({
                     name: studentDto.name,
                     username: studentDto.username,
                     id: studentDto.id,
                     role: studentDto.role,
-                    accessToken: studentDto.access_token
+                    accessToken: studentDto.access_token,
+                    isAuth: true
                 })),
                 logout: () => set({
                     id: '',
@@ -48,6 +50,7 @@ export const useUserStore = create<IUserStore>()(
                     course: -1,
                     role: Roles.Student,
                     accessToken: '',
+                    isAuth: false
                 })
             }),
             {

@@ -11,6 +11,7 @@ export interface IUserStore {
     course: number
     role: Roles
     accessToken: string
+    isAuth: boolean
     setUUID: () => void
     setAccessToken: (access_token: string) => void
     setStudent: (studentData: UserStudentDto) => void

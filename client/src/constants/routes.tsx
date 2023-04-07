@@ -1,6 +1,6 @@
 import {IRoute} from "../interfaces/IRoute";
 import Student from "../pages/student/Student";
-import Admin from "../pages/admin/Admin";
+import TeacherHome from "../pages/teacherHome/TeacherHome";
 import Login from "../pages/login/Login";
 import {Navigate} from "react-router-dom";
 import StudentRegistration from "../pages/studentRegistration/StudentRegistration";
@@ -27,8 +27,8 @@ export const routes: IRoute[] = [
         element: <StudentRegistration/>
     },
     {
-        name: 'Админ панель',
-        path: '/admin',
-        element: <Admin/>
+        name: 'Панель преподавателя',
+        path: '/teacher/home',
+        element: <TeacherHome/>
     },
 ]
