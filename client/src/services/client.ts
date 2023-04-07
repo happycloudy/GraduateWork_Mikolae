@@ -12,11 +12,9 @@ export const client = ky.create({
         beforeError: [
             error => {
                 const {response} = error;
-                console.dir('ERROR')
                 if (response && response.body) {
                     if(response.status === 401) {
                         error.name = 'Ошибка авторизации';
-
                         if (typeof error.options.body === "string") {
                             const body = JSON.parse(error.options.body)
 

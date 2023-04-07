@@ -4,13 +4,16 @@ import {IUserStore} from "./interfaces/user-store.interface";
 import {getUUIDAsync} from "../../helpers/getUUIDAsync";
 import {UserStudentDto} from "./interfaces/user-student-dto";
 import {Roles} from "../../modules/Login/enums/loginType.enum";
+import {UserTeacherDto} from "./interfaces/user-teacher-dto";
 
 export const useUserStore = create<IUserStore>()(
     devtools(
         persist(
             (set,get) => ({
+                id: '',
                 uuid: '',
                 name: '',
+                username: '',
                 group: '',
                 course: -1,
                 role: Roles.Student,
@@ -28,10 +31,27 @@ export const useUserStore = create<IUserStore>()(
                     group: studentDto.group,
                     course: studentDto.course,
                     accessToken: studentDto.access_token
-                }))
+                })),
+                setTeacher: (studentDto: UserTeacherDto) => set(() => ({
+                    name: studentDto.name,
+                    username: studentDto.username,
+                    id: studentDto.id,
+                    role: studentDto.role,
+                    accessToken: studentDto.access_token
+                })),
+                logout: () => set({
+                    id: '',
+                    uuid: '',
+                    name: '',
+                    username: '',
+                    group: '',
+                    course: -1,
+                    role: Roles.Student,
+                    accessToken: '',
+                })
             }),
             {
-                name: 'students-store'
+                name: 'user-store'
             }
         )
     )

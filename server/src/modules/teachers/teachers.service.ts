@@ -37,6 +37,10 @@ export class TeachersService {
     const payload = { username: teacher.username, sub: teacher._id };
     return {
       access_token: this.jwtService.sign(payload),
+      id: teacher._id,
+      name: teacher.name,
+      username: teacher.username,
+      role: teacher.role,
     };
   }
 

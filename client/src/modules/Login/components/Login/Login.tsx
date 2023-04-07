@@ -2,7 +2,7 @@ import React, {useCallback, useState} from 'react';
 import {Roles} from "../../enums/loginType.enum";
 import LoginStudent from "../LoginStudent/LoginStudent";
 import LoginTeacher from "../LoginTeacher/LoginTeacher";
-import {Radio, RadioChangeEvent, Space} from "antd";
+import {Radio, RadioChangeEvent, Row, Space} from "antd";
 
 export const Login = () => {
     const [type, setType] = useState<Roles>(Roles.Student)
@@ -22,11 +22,15 @@ export const Login = () => {
 
     return (
         <Space direction={'vertical'} size={'small'}>
-            <Radio.Group value={type} onChange={handleType}>
-                <Radio.Button value={Roles.Student}>Я студент</Radio.Button>
-                <Radio.Button value={Roles.Teacher}>Я преподаватель</Radio.Button>
-            </Radio.Group>
-            {loginForm()}
+            <Row justify={'center'}>
+                <Radio.Group value={type} onChange={handleType}>
+                    <Radio.Button value={Roles.Student}>Я студент</Radio.Button>
+                    <Radio.Button value={Roles.Teacher}>Я преподаватель</Radio.Button>
+                </Radio.Group>
+            </Row>
+            <Row justify={"center"}>
+                {loginForm()}
+            </Row>
         </Space>
     );
 };
