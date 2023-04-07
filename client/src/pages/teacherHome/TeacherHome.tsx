@@ -4,9 +4,11 @@ import {FloatButton} from "antd";
 import {LogoutOutlined} from "@ant-design/icons";
 import {useUserStore} from "../../stores/user/user.store";
 import {useNavigate} from "react-router-dom";
+import {Sidebar} from "../../modules/Sidebar";
 
 const TeacherHome = () => {
     const logout = useUserStore(state => state.logout)
+    const isAuth = useUserStore(state => state.isAuth)
     const navigate = useNavigate()
 
     const handleLogout = () => {
@@ -15,10 +17,13 @@ const TeacherHome = () => {
     }
 
     return (
-        <PageLayout>
-            <FloatButton type={'primary'} icon={<LogoutOutlined />} onClick={handleLogout}/>
+        <>
+            {isAuth && <Sidebar/>}
+            <PageLayout>
+                <FloatButton type={'primary'} icon={<LogoutOutlined/>} onClick={handleLogout} tooltip={'Выход'}/>
 
-        </PageLayout>
+            </PageLayout>
+        </>
     );
 };
 

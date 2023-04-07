@@ -3,12 +3,12 @@ import { HomeOutlined } from "@ant-design/icons";
 export const menuItems = [
     {
         label: 'Главная',
-        key: '1',
+        key: '/teacher/home',
         icon: <HomeOutlined/>,
     },
     {
         label: 'Предметы',
-        key: '2',
+        key: '/teacher/lessons',
         icon: <HomeOutlined/>,
     },
 ]
