@@ -5,7 +5,7 @@ import {LogoutOutlined} from "@ant-design/icons";
 import {FloatButton} from "antd";
 import {useNavigate} from "react-router-dom";
 
-const TeacherLessons = () => {
+const TeacherKey = () => {
     const logout = useUserStore(state => state.logout)
     const isAuth = useUserStore(state => state.isAuth)
     const navigate = useNavigate()
@@ -23,4 +23,4 @@ const TeacherLessons = () => {
     );
 };
 
-export default TeacherLessons;
+export default TeacherKey;

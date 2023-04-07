@@ -1,11 +1,11 @@
 import React from 'react';
-import {Divider, Row, Space, Typography} from "antd";
+import {Row, Space, Typography} from "antd";
 import {useUserStore} from "../../../../stores/user/user.store";
 
 const TeacherInfo = () => {
     const name = useUserStore(state => state.name)
     return (
-        <Space size={'small'} direction={'vertical'}>
+        <Space size={'small'} direction={'vertical'} style={{width: '100%'}}>
             <Typography.Title level={2} style={{textAlign: 'center'}}>
                 {name}
             </Typography.Title>

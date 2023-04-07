@@ -4,7 +4,7 @@ import TeacherHome from "../pages/teacherHome/TeacherHome";
 import Login from "../pages/login/Login";
 import {Navigate} from "react-router-dom";
 import StudentRegistration from "../pages/studentRegistration/StudentRegistration";
-import TeacherLessons from "../pages/teacherLessons/TeacherLessons";
+import TeacherKey from "../pages/teacherKey/TeacherKey";
 
 export const routes: IRoute[] = [
     {
@@ -35,6 +35,6 @@ export const routes: IRoute[] = [
     {
         name: 'Панель преподавателя',
         path: '/teacher/lessons',
-        element: <TeacherLessons/>
+        element: <TeacherKey/>
     },
 ]

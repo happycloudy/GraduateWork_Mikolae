@@ -1,0 +1,1 @@
+export {StudentsGroupTable} from './components/StudentsGroupTable/StudentsGroupTable'
