@@ -20,6 +20,8 @@ export const useUserStore = create<IUserStore>()(
                 accessToken: '',
                 isAuth: false,
 
+                lessons: [],
+
                 setUUID: async () => {
                     const uuid = await getUUIDAsync() as string
                     set(() => ({uuid: uuid}))

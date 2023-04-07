@@ -1,6 +1,7 @@
 import {UserStudentDto} from "./user-student-dto";
 import {Roles} from "../../../modules/Login/enums/loginType.enum";
 import {UserTeacherDto} from "./user-teacher-dto";
+import {ILesson} from "../../../interfaces/ILesson";
 
 export interface IUserStore {
     id: string
@@ -12,6 +13,9 @@ export interface IUserStore {
     role: Roles
     accessToken: string
     isAuth: boolean
+
+    lessons: ILesson[]
+
     setUUID: () => void
     setAccessToken: (access_token: string) => void
     setStudent: (studentData: UserStudentDto) => void
