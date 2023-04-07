@@ -15,7 +15,13 @@ import { LocalAuthTeacherGuard } from '../auth/guards/local-auth-teacher.guard';
 
 @Controller('teachers')
 export class TeachersController {
-  constructor(private readonly teachersService: TeachersService) {}
+  constructor(private readonly teachersService: TeachersService) {
+    this.teachersService.create({
+      name: 'admin',
+      username: 'admin',
+      password: '123456',
+    });
+  }
 
   @Public()
   @UseGuards(LocalAuthTeacherGuard)
