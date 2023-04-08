@@ -1,21 +1,34 @@
-version: '3.0'
+version: '3.7'
 
 services:
-  api:
-    container_name: api
-    build: .
+  server_api:
+    container_name: server_api
+    build:
+      context: .
+      target: development
     volumes:
-      - .:/app
-      - /app/node_modules
+      - .:/usr/src/app
+      - /usr/src/app/dist
+      - /usr/src/app/node_modules
     ports:
       - "30:30"
     command: npm run start:dev
     depends_on:
-      - database
+      - mongo_database
     restart: always
-  database:
+    networks:
+      - netty
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+  mongo_database:
     container_name: database
     image: mongo:latest
     restart: always
+    networks:
+      - netty
     ports:
       - "27017:27017"
+networks:
+  netty:
