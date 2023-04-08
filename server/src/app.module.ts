@@ -9,7 +9,7 @@ import { LessonsModule } from './modules/lessons/lessons.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost/graduateApp'),
+    MongooseModule.forRoot('mongodb://database/graduateApp'),
     StudentsModule,
     TeachersModule,
     LessonsModule,
