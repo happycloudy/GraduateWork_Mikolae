@@ -6,13 +6,25 @@ import { StudentsModule } from './modules/students/students.module';
 import { TeachersModule } from './modules/teachers/teachers.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { LessonsModule } from './modules/lessons/lessons.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { configuration } from '../config/configuration';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://database/graduateApp'),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get('MONGO_DB_URI'),
+        user: '',
+        pass: '',
+        authSource: configService.get('MONGO_DB_NAME'),
+      }),
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: `${process.cwd()}/config/env/.env.${process.env.NODE_ENV}`,
+      load: [configuration],
     }),
     StudentsModule,
     TeachersModule,
