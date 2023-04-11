@@ -19,8 +19,8 @@ export class TeachersService {
     return this.teacherModel.findOne({ username: username });
   }
 
-  async findOneById(id: string) {
-    return this.teacherModel.findOne({ _id: id });
+  async findOneById(id: any) {
+    return this.teacherModel.findOne({ _id: id }).populate('lessons');
   }
 
   async create(createTeacherDto: CreateTeacherDto) {
@@ -49,42 +49,30 @@ export class TeachersService {
     return 1;
   }
 
-  async addTeachersLesson(addTeachersLessonDto: AddTeachersLessonDto) {
-    const lesson = await this.lessonsService.findOne(
-      addTeachersLessonDto.lessonId,
+  async addTeachersLesson(dto: AddTeachersLessonDto) {
+    const teacher = await this.findOneById(dto.teacherId);
+    const lesson = await this.lessonsService.findOne(dto.lessonId);
+    const isLessonAdded = teacher.lessons.some(
+      (item) => item._id.toString() === dto.lessonId,
     );
 
-    if (lesson.teacherId) {
-      return this.teacherModel.findOne({
-        _id: lesson.teacherId,
-      });
+    if (isLessonAdded) {
+      return teacher;
+    } else {
+      teacher.lessons.push(lesson);
+      await teacher.save();
+      return teacher;
     }
-
-    const teacher = await this.teacherModel.findOne({
-      _id: addTeachersLessonDto.teacherId,
-    });
-
-    teacher.lessonsIds.push(addTeachersLessonDto.lessonId);
-
-    this.lessonsService.addTeacher(
-      addTeachersLessonDto.teacherId,
-      addTeachersLessonDto.lessonId,
-    );
-
-    return teacher.save();
   }
 
-  async removeTeachersLesson(removeTeachersLessonDto: AddTeachersLessonDto) {
-    const teacher = await this.teacherModel.findOne({
-      _id: removeTeachersLessonDto.teacherId,
-    });
+  async removeTeachersLesson(dto: AddTeachersLessonDto) {
+    const teacher = await this.findOneById(dto.teacherId);
 
-    teacher.lessonsIds = teacher.lessonsIds.filter(
-      (lesson) => lesson !== removeTeachersLessonDto.lessonId,
+    teacher.lessons = teacher.lessons.filter(
+      (item) => item._id.toString() !== dto.lessonId,
     );
+    await teacher.save();
 
-    this.lessonsService.removeTeacher(removeTeachersLessonDto.lessonId);
-
-    return teacher.save();
+    return teacher;
   }
 }

@@ -1,13 +1,15 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Schema as MongooseSchema } from 'mongoose';
-import { Lesson } from './lesson.schema';
+import { Document, HydratedDocument } from 'mongoose';
+import * as mongoose from 'mongoose';
+import { Role } from '../modules/auth/enums/roles.enum';
+import { Lesson, LessonDocument } from './lesson.schema';
 
 export type TeacherDocument = HydratedDocument<Teacher>;
 
 @Schema()
-export class Teacher {
+export class Teacher extends Document {
   @Prop({ default: 'teacher' })
-  role: 'teacher';
+  role: Role;
 
   @Prop()
   name: string;
@@ -18,16 +20,8 @@ export class Teacher {
   @Prop()
   password: string;
 
-  @Prop({
-    default: [],
-  })
-  lessonsIds: string[];
-
-  @Prop({
-    type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Lesson' }],
-    default: undefined,
-  })
-  lessons: Lesson[];
+  @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: Lesson.name }] })
+  lessons: LessonDocument[];
 }
 
 export const TeacherSchema = SchemaFactory.createForClass(Teacher);

@@ -11,7 +11,7 @@ export class LessonsService {
   ) {}
 
   async getLessons() {
-    return this.lessonModel.find().exec();
+    return this.lessonModel.find().populate('teacher').exec();
   }
 
   async create(createLessonDto: CreateLessonDto) {

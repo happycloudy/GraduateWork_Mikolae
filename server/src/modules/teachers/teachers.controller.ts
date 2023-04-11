@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Patch,
   Post,
   Request,
@@ -38,6 +39,11 @@ export class TeachersController {
   @Get('/students')
   getStudents() {
     return this.teachersService.getStudents();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.teachersService.findOneById(id);
   }
 
   @Patch('lessons/add')
