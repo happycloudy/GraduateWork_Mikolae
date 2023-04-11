@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Document } from 'mongoose';
+import { HydratedDocument } from 'mongoose';
 import { Teacher, TeacherDocument } from './teachers.schema';
 import mongoose from 'mongoose';
 
 export type LessonDocument = HydratedDocument<Lesson>;
 
 @Schema()
-export class Lesson extends Document {
+export class Lesson {
   @Prop()
   name: string;
 
@@ -20,7 +20,7 @@ export class Lesson extends Document {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Teacher',
   })
-  teacher: TeacherDocument;
+  lesson: LessonDocument;
 }
 
 export const LessonSchema = SchemaFactory.createForClass(Lesson);

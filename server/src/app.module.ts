@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { LessonsModule } from './modules/lessons/lessons.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configuration } from '../config/configuration';
+import { VisitsModule } from './modules/visits/visits.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { configuration } from '../config/configuration';
     TeachersModule,
     LessonsModule,
     AuthModule,
+    VisitsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
