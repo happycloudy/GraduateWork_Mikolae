@@ -5,12 +5,13 @@ import {useUserStore} from "../../../../stores/user/user.store";
 import {IRegistrationData} from "../../interfaces/RegistrationData.interface";
 import {Button, Form, Input, notification, Row, Space} from "antd";
 import {LockOutlined, UserOutlined} from '@ant-design/icons';
+import {useNavigate} from "react-router-dom";
 
 const Registration = () => {
     const [api, contextHolder] = notification.useNotification();
     const uuid = useUserStore(state => state.uuid)
-    const setAccessToken = useUserStore(state => state.setAccessToken)
     const mutation = useRegisterStudentMutation()
+    const navigate = useNavigate()
 
 
     const onSubmit = (result: IRegistrationData) => {
@@ -25,7 +26,9 @@ const Registration = () => {
 
 
     useEffect(() => {
-        if (mutation.isSuccess) setAccessToken(mutation.data.access_token)
+        if (mutation.isSuccess) {
+            navigate('/login')
+        }
     }, [mutation.isSuccess])
 
     useEffect(() => {
@@ -42,7 +45,7 @@ const Registration = () => {
         <Space direction={'vertical'}>
             <Form onFinish={onSubmit}>
                 {contextHolder}
-                <Form.Item name="username" rules={[{required: true, message: 'Введите ФИО!'}]}>
+                <Form.Item name="name" rules={[{required: true, message: 'Введите ФИО!'}]}>
                     <Input size={'large'} prefix={<UserOutlined className="site-form-item-icon"/>} placeholder="ФИО"/>
                 </Form.Item>
 

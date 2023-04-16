@@ -1,4 +1,4 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Student, StudentDocument } from '../../schemas/student.schema';
 import { Model } from 'mongoose';
@@ -45,7 +45,10 @@ export class StudentsService {
     });
 
     if (existingStudent) {
-      throw new HttpException('Студент уже зарегистрирован на этом устройстве, вернитесь на страницу входа', HttpStatus.FORBIDDEN);
+      throw new HttpException(
+        'Студент уже зарегистрирован на этом устройстве, вернитесь на страницу входа',
+        HttpStatus.FORBIDDEN,
+      );
     } else {
       return this.studentModel.create(createStudentDto);
     }

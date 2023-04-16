@@ -36,8 +36,18 @@ export class VisitsService {
 
   async subscribeStudent(dto: SubscribeStudentDto) {
     const student = await this.studentsService.findOneById(dto.studentId);
-    const visit = await this.findOneByKey(dto.key);
-    visit.students.push(student);
+    const visit = await this.visitModel.findOneAndUpdate(
+      {
+        key: dto.key,
+        'students._id': { $ne: student._id },
+      },
+      {
+        $addToSet: {
+          students: student,
+        },
+      },
+    );
+
     await visit.save();
     return {
       result: true,
