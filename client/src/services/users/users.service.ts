@@ -6,6 +6,8 @@ import {IRegisterStudentRequest} from "./interfaces/RegisterStudentRequest.inter
 import {IRegisterStudentResponse} from "./interfaces/RegisterStudentResponse.interface";
 import {ILoginTeacherRequest} from "./interfaces/LoginTeacherRequest.interface";
 import {ILoginTeacherResponse} from "./interfaces/LoginTeacherResponse.interface";
+import {ISubscribeVisitRequest} from "./interfaces/SubscribeVisitRequest.interface";
+import {ISubscribeVisitResponse} from "./interfaces/SubscribeVisitResponse.interface";
 
 const usersService = {
     loginStudent: async (uuid: string): Promise<ILoginStudentResponse> => {
@@ -32,7 +34,15 @@ const usersService = {
         })
 
         return result.json()
-    }
+    },
+
+    subscribeVisit: async (req: ISubscribeVisitRequest): Promise<ILoginTeacherResponse> => {
+        const result = await client.patch('visits/subscribeStudent', {
+            json: req,
+        })
+
+        return result.json()
+    },
 }
 
 
@@ -48,3 +58,8 @@ export const useLoginTeacherMutation = () => useMutation<
     HTTPError,
     ILoginTeacherRequest
 >(usersService.loginTeacher)
+export const useSubscribeVisitMutation = () => useMutation<
+    ISubscribeVisitResponse,
+    HTTPError,
+    ISubscribeVisitRequest
+>(usersService.subscribeVisit)

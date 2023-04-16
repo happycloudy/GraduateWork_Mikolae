@@ -25,7 +25,6 @@ export class StudentsController {
   @UseGuards(LocalAuthStudentGuard)
   @Post('/signin')
   async signIn(@Request() req) {
-    // console.log(req.user);
     return this.studentService.signIn(req.user);
   }
 

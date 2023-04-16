@@ -36,6 +36,7 @@ export class StudentsService {
       name: student.name,
       group: student.group,
       course: student.course,
+      id: student._id,
     };
   }
 

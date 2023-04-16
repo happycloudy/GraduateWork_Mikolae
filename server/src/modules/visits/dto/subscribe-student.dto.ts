@@ -1,4 +1,4 @@
 export class SubscribeStudentDto {
-  studentId: string;
+  id: string;
   key: string;
 }

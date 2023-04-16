@@ -1,5 +1,6 @@
 import {QueryClient} from "react-query";
 import ky from "ky";
+import {useUserStore} from "../stores/user/user.store";
 
 export const queryClient = new QueryClient()
 
@@ -9,6 +10,12 @@ const baseUrl = 'http://localhost:30'
 export const client = ky.create({
     prefixUrl: baseUrl,
     hooks: {
+        beforeRequest: [
+            request => {
+                const token = useUserStore.getState().accessToken
+                return request.headers.set('Authorization', `Bearer ${token}`)
+            }
+        ],
         beforeError: [
             error => {
                 const {response} = error;

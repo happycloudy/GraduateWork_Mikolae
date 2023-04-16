@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Visit, VisitDocument } from '../../schemas/visit.schema';
 import { Model } from 'mongoose';
@@ -35,7 +35,12 @@ export class VisitsService {
   }
 
   async subscribeStudent(dto: SubscribeStudentDto) {
-    const student = await this.studentsService.findOneById(dto.studentId);
+    const student = await this.studentsService.findOneById(dto.id);
+
+    if (!student) {
+      throw new HttpException('Студент не существует', HttpStatus.FORBIDDEN);
+    }
+
     const visit = await this.visitModel.findOneAndUpdate(
       {
         key: dto.key,
@@ -48,9 +53,16 @@ export class VisitsService {
       },
     );
 
-    await visit.save();
-    return {
-      result: true,
-    };
+    if (visit) {
+      await visit.save();
+      return {
+        result: true,
+      };
+    } else {
+      throw new HttpException(
+        'Такого ключа не существует',
+        HttpStatus.FORBIDDEN,
+      );
+    }
   }
 }

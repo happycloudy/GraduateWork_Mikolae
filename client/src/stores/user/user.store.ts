@@ -33,6 +33,7 @@ export const useUserStore = create<IUserStore>()(
                     group: studentDto.group,
                     course: studentDto.course,
                     accessToken: studentDto.access_token,
+                    id: studentDto.id,
                     isAuth: true
                 })),
                 setTeacher: (studentDto: UserTeacherDto) => set(() => ({
