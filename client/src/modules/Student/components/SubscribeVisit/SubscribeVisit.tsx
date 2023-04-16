@@ -42,7 +42,7 @@ export const SubscribeVisit = () => {
     return (
         <Form onFinish={handleFinish}>
             {contextHolder}
-            <Space direction={'vertical'} align={'center'} size={'small'}>
+            <Space direction={'vertical'} align={'center'} size={'small'} style={{width:'100%'}}>
                 <Typography.Title level={3}>Записаться на занятие</Typography.Title>
                 <Form.Item name={'key'}>
                     <Input placeholder={'Код занятия (взять у преподавателя)'}/>
