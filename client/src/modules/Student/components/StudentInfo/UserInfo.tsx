@@ -5,9 +5,8 @@ import {List, Typography} from "antd";
 export const UserInfo = () => {
     const name = useUserStore(state => state.name)
     const group = useUserStore(state => state.group)
-    const uuid = useUserStore(state => state.uuid)
 
-    const listData = useMemo(() => ({name, group, uuid}),[name, group, uuid])
+    const listData = useMemo(() => ({name, group}),[name, group])
 
     return (
             <List
