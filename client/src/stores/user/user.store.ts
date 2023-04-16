@@ -46,7 +46,6 @@ export const useUserStore = create<IUserStore>()(
                 })),
                 logout: () => set({
                     id: '',
-                    uuid: '',
                     name: '',
                     username: '',
                     group: '',
