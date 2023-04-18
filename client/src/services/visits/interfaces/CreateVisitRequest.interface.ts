@@ -1,5 +1,5 @@
 export interface ICreateVisitRequest {
-    date: Date
+    date: number
     key: string
     teacherId: string
     lessonId: string

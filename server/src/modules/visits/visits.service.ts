@@ -21,6 +21,15 @@ export class VisitsService {
     });
   }
 
+  async findAllByTeacher(teacherId: string) {
+    return this.visitModel
+      .find({
+        teacher: teacherId,
+      })
+      .populate('lesson')
+      .populate('students');
+  }
+
   async findOneById(id: string) {
     return this.visitModel
       .findById(id)

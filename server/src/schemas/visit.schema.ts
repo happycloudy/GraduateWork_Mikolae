@@ -31,7 +31,7 @@ export class Visit {
     type: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Lesson',
+        ref: 'Student',
       },
     ],
   })

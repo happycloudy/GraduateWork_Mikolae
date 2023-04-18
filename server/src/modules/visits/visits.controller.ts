@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Req } from '@nestjs/common';
 import { CreateVisitDto } from './dto/create-visit.dto';
 import { VisitsService } from './visits.service';
 import { SubscribeStudentDto } from './dto/subscribe-student.dto';
@@ -15,6 +15,11 @@ export class VisitsController {
   @Get(':id')
   findOneVisit(@Param('id') id: string) {
     return this.visitsService.findOneById(id);
+  }
+
+  @Get()
+  findVisits(@Req() req: any) {
+    return this.visitsService.findAllByTeacher(req.user.userId);
   }
 
   @Patch('/subscribeStudent/')

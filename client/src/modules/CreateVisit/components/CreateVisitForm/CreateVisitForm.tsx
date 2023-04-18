@@ -1,21 +1,35 @@
 import React, {useEffect, useState} from 'react';
-import {AutoComplete, Button, Form, Input, Space, Typography} from "antd";
+import {AutoComplete, Button, DatePicker, Form, Input, Typography} from "antd";
 import {ICreateVisit} from "../../interfaces/createVisit.interface";
 import {useCreateVisitMutation} from "../../../../services/visits/visits.service";
 import {useAutocompleteLesson} from "../../../../services/lessons/lessons.service";
+import {
+    IAutocompleteLessonResponse
+} from "../../../../services/lessons/interfaces/AutocompleteLessonResponse.interface";
+import {useUserStore} from "../../../../stores/user/user.store";
 
+const now = Date.now().toString()
+const initialKey = new Date().toLocaleDateString().replaceAll('.', '')
+    + '_' + now.slice(now.length - 5, now.length)
 
 export const CreateVisitForm = () => {
-    const [lessonsOptions, setLessonsOptions] = useState<string[]>([])
+    const [lessonsOptions, setLessonsOptions] = useState<IAutocompleteLessonResponse[]>([])
     const autocomplete = useAutocompleteLesson()
     const createVisit = useCreateVisitMutation()
-
+    const teacherId = useUserStore(state => state.id)
 
     const handleFinish = (result: ICreateVisit) => {
-        console.log(result)
+        const lessonId = lessonsOptions.find(
+            item => item.name === result.lessonId.split('|')[0]
+        )!.id
+
+        const date = +result.date.$d
+
         createVisit.mutate({
-            ...result,
-            teacherId: '',
+            key: result.key,
+            teacherId: teacherId,
+            lessonId: lessonId,
+            date: date | Date.now()
         })
     }
 
@@ -25,33 +39,37 @@ export const CreateVisitForm = () => {
 
     useEffect(() => {
         if (autocomplete.isSuccess) {
-            setLessonsOptions(autocomplete.data.lessons)
+            setLessonsOptions(autocomplete.data)
         }
     }, [autocomplete.isSuccess])
 
     return (
-        <Form onFinish={handleFinish}>
-            <Space direction={'vertical'} align={'center'}>
-                <Typography.Title level={3}>
-                    Создать занятие
-                </Typography.Title>
-                <Form.Item name={'key'}>
-                    <Input placeholder={'Ключ'} style={{width: 200}}/>
-                </Form.Item>
-                <Form.Item name={'lessonId'}>
-                    <AutoComplete
-                        style={{width: 200}}
-                        options={lessonsOptions.map(lesson => ({label: lesson, value: lesson}))}
-                        onSearch={handleSearch}
-                        placeholder="input here"
-                    />
-                </Form.Item>
-                <Form.Item>
-                    <Button htmlType={'submit'}>
-                        Создать
-                    </Button>
-                </Form.Item>
-            </Space>
+        <Form layout={'vertical'} onFinish={handleFinish} initialValues={{key: initialKey}}>
+            <Typography.Title level={3}>
+                Создать занятие
+            </Typography.Title>
+            <Form.Item label={'Ключ'} name={'key'} rules={[{required: true, message: 'Введите ключ'}]}>
+                <Input placeholder={'Ключ'} style={{width: 300}}/>
+            </Form.Item>
+            <Form.Item label={'Предмет'} name={'lessonId'} rules={[{required: true, message: 'Выберите предмет'}]}>
+                <AutoComplete
+                    style={{width: 300}}
+                    options={lessonsOptions.map(lesson => ({
+                        label: `${lesson.name} | ${lesson.group}`,
+                        value: `${lesson.name}|${lesson.group}`
+                    }))}
+                    onSearch={handleSearch}
+                    placeholder="Предмет"
+                />
+            </Form.Item>
+            <Form.Item label={'Дата'} name={'date'} rules={[{required: true, message: 'Выберите дату '}]}>
+                <DatePicker style={{width: 300}}/>
+            </Form.Item>
+            <Form.Item>
+                <Button htmlType={'submit'}>
+                    Создать
+                </Button>
+            </Form.Item>
         </Form>
     );
 };
