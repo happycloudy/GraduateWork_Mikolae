@@ -4,6 +4,7 @@ import {useUserStore} from "../../stores/user/user.store";
 import {LogoutOutlined} from "@ant-design/icons";
 import {FloatButton} from "antd";
 import {useNavigate} from "react-router-dom";
+import {CreateVisit} from "../../modules/CreateVisit";
 
 const TeacherKey = () => {
     const logout = useUserStore(state => state.logout)
@@ -19,6 +20,7 @@ const TeacherKey = () => {
         <>
             {isAuth && <Sidebar/>}
             <FloatButton type={'primary'} icon={<LogoutOutlined/>} onClick={handleLogout} tooltip={'Выход'}/>
+            <CreateVisit/>
         </>
     );
 };

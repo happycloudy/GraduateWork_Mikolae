@@ -20,7 +20,7 @@ export class Lesson {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Teacher',
   })
-  lesson: LessonDocument;
+  teacher: TeacherDocument;
 }
 
 export const LessonSchema = SchemaFactory.createForClass(Lesson);

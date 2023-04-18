@@ -9,6 +9,8 @@ import { LessonsModule } from './modules/lessons/lessons.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configuration } from '../config/configuration';
 import { VisitsModule } from './modules/visits/visits.module';
+import { AutocompleteModule } from './modules/autocomplete/autocomplete.module';
+import { MockModule } from './modules/mock/mock.module';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { VisitsModule } from './modules/visits/visits.module';
     LessonsModule,
     AuthModule,
     VisitsModule,
+    AutocompleteModule,
+    MockModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -18,31 +18,13 @@ export class LessonsService {
     return this.lessonModel.create(createLessonDto);
   }
 
-  async addTeacher(teacherId: string, lessonId: any) {
-    return this.lessonModel.findOneAndUpdate(
-      {
-        _id: lessonId,
-      },
-      {
-        teacherId: teacherId,
-      },
-    );
-  }
-
-  async removeTeacher(lessonId: any) {
-    return this.lessonModel.findOneAndUpdate(
-      {
-        _id: lessonId,
-      },
-      {
-        teacherId: '',
-      },
-    );
-  }
-
-  async findOne(id) {
+  async findOneById(id: string) {
     return this.lessonModel.findOne({
       _id: id,
     });
+  }
+
+  async findOneByFilter(filter: any) {
+    return this.lessonModel.findOne(filter);
   }
 }

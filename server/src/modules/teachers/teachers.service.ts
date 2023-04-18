@@ -51,7 +51,7 @@ export class TeachersService {
 
   async addTeachersLesson(dto: AddTeachersLessonDto) {
     const teacher = await this.findOneById(dto.teacherId);
-    const lesson = await this.lessonsService.findOne(dto.lessonId);
+    const lesson = await this.lessonsService.findOneById(dto.lessonId);
     const isLessonAdded = teacher.lessons.some(
       (item) => item._id.toString() === dto.lessonId,
     );
