@@ -5,7 +5,7 @@ import {useCreateVisitMutation} from "../../../../services/visits/visits.service
 import {useAutocompleteLesson} from "../../../../services/lessons/lessons.service";
 import {
     IAutocompleteLessonResponse
-} from "../../../../services/lessons/interfaces/AutocompleteLessonResponse.interface";
+} from "../../../../services/lessons/interfaces/IAutocompleteLessonResponse";
 import {useUserStore} from "../../../../stores/user/user.store";
 
 const now = Date.now().toString()
