@@ -3,17 +3,31 @@ import {Button, Card, List} from "antd";
 import {LinkOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 
-interface IProps {
-    title?: string
-    items?: any[]
-    withLinks: boolean
+interface IItem {
+    name: string
+    id: string
+    copyContent?: string
+    props?: any
 }
 
-export const ListCard = ({title = '', items = [], withLinks}: IProps) => {
+interface IProps {
+    title?: string
+    items?: IItem[]
+    withLinks?: boolean
+    withCopyContent?: boolean
+}
+
+export const ListCard = ({title = '', items = [], withLinks, withCopyContent}: IProps) => {
     const navigate = useNavigate()
 
     const handleNavigate = (id: string) => {
         navigate(`/teacher/lessons/${id}`)
+    }
+
+    const handleCopy = (content: string | undefined) => {
+        if (content) {
+            navigator.clipboard.writeText(content)
+        }
     }
 
     return (
@@ -28,6 +42,10 @@ export const ListCard = ({title = '', items = [], withLinks}: IProps) => {
                         {
                             withLinks &&
                             <Button type={'link'} onClick={() => handleNavigate(item.id)} icon={<LinkOutlined/>}/>
+                        }
+                        {
+                            withCopyContent &&
+                            <Button type={'link'} onClick={() => handleCopy(item.copyContent)} icon={<LinkOutlined/>}/>
                         }
                     </List.Item>
                 )}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PageLayout from "../../modules/Helpers/components/PageLayout/PageLayout";
 import {Col, FloatButton, Row, Space} from "antd";
 import {LogoutOutlined} from "@ant-design/icons";
@@ -8,17 +8,28 @@ import {Sidebar} from "../../modules/Sidebar";
 import {Container} from "../../modules/Helpers/components/Container/Container";
 import {LastLessonCard, ListCard} from "../../modules/InfoCards";
 import {StudentsGroupTable} from "../../modules/StudentsGroupTable";
+import {useQuery} from "react-query";
+import {visitsService} from "../../services/visits/visits.service";
 
 const TeacherHome = () => {
-    const logout = useUserStore(state => state.logout)
     const isAuth = useUserStore(state => state.isAuth)
     const lessons = useUserStore(state => state.lessons)
+    const visits = useUserStore(state => state.visits)
+    const initVisits = useUserStore(state => state.initVisits)
+    const logout = useUserStore(state => state.logout)
+    const {data, isSuccess} = useQuery('get-visits', visitsService.fetchVisits)
     const navigate = useNavigate()
 
     const handleLogout = () => {
         logout()
         navigate('/')
     }
+
+    useEffect(() => {
+        if (isSuccess) {
+            initVisits(data || [])
+        }
+    }, [isSuccess])
 
     return (
         <>
@@ -29,7 +40,23 @@ const TeacherHome = () => {
                     <Space size={'large'} direction={'vertical'} style={{width: '100%'}}>
                         <Row style={{width: '100%'}}>
                             <Col>
-                                <ListCard title={'Мои предметы'} items={lessons} withLinks/>
+                                <ListCard title={'Мои предметы'}
+                                          items={lessons.map(item => ({
+                                              name: item.name,
+                                              id: item.id
+                                          }))}
+                                          withLinks/>
+                            </Col>
+                            <Col offset={3}>
+                                <ListCard title={'Мои занятия (последние 10)'}
+                                          items={visits.map(item => ({
+                                              name: item.lesson?.name ||
+                                                  'Неизвестный предмет' + ' ' +
+                                                  (new Date(item.date)).toLocaleDateString(),
+                                              id: item.id,
+                                              copyContent: item.key
+                                          }))}
+                                          withCopyContent/>
                             </Col>
                             <Col offset={3}>
                                 <LastLessonCard/>

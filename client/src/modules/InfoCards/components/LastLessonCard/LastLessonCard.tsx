@@ -1,8 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Card, Popover, Row, Typography} from "antd";
+import {useUserStore} from "../../../../stores/user/user.store";
 
 export const LastLessonCard = () => {
-    const [code] = useState('rfgeg234rge2')
+    const code = useUserStore(state => state.visits.length ?
+        state.visits.at(-1)!.key :
+        'Ключа нету'
+    )
+
     const handleClick = () => {
         navigator.clipboard.writeText(code)
     }

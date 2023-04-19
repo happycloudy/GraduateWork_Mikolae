@@ -5,6 +5,7 @@ import {getUUIDAsync} from "../../helpers/getUUIDAsync";
 import {UserStudentDto} from "./interfaces/user-student-dto";
 import {Roles} from "../../modules/Login/enums/loginType.enum";
 import {UserTeacherDto} from "./interfaces/user-teacher-dto";
+import {IVisit} from "../../interfaces/IVisit";
 
 export const useUserStore = create<IUserStore>()(
     devtools(
@@ -21,27 +22,28 @@ export const useUserStore = create<IUserStore>()(
                 isAuth: false,
 
                 lessons: [],
+                visits: [],
 
                 setUUID: async () => {
                     const uuid = await getUUIDAsync() as string
                     set(() => ({uuid: uuid}))
                 },
                 setAccessToken: (access_token: string) => set(() => ({accessToken: access_token})),
-                setStudent: (studentDto: UserStudentDto) => set(() => ({
-                    name: studentDto.name,
-                    role: studentDto.role,
-                    group: studentDto.group,
-                    course: studentDto.course,
-                    accessToken: studentDto.access_token,
-                    id: studentDto.id,
+                setStudent: (dto: UserStudentDto) => set(() => ({
+                    name: dto.name,
+                    role: dto.role,
+                    group: dto.group,
+                    course: dto.course,
+                    accessToken: dto.access_token,
+                    id: dto.id,
                     isAuth: true
                 })),
-                setTeacher: (studentDto: UserTeacherDto) => set(() => ({
-                    name: studentDto.name,
-                    username: studentDto.username,
-                    id: studentDto.id,
-                    role: studentDto.role,
-                    accessToken: studentDto.access_token,
+                setTeacher: (dto: UserTeacherDto) => set(() => ({
+                    name: dto.name,
+                    username: dto.username,
+                    id: dto.id,
+                    role: dto.role,
+                    accessToken: dto.access_token,
                     isAuth: true
                 })),
                 logout: () => set({
@@ -53,7 +55,8 @@ export const useUserStore = create<IUserStore>()(
                     role: Roles.Student,
                     accessToken: '',
                     isAuth: false
-                })
+                }),
+                initVisits: (visits: IVisit[]) => set({visits})
             }),
             {
                 name: 'user-store'

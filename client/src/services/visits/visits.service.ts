@@ -3,8 +3,9 @@ import {ICreateVisitResponse} from "./interfaces/CreateVisitResponse.interface";
 import {ICreateVisitRequest} from "./interfaces/CreateVisitRequest.interface";
 import {useMutation} from "react-query";
 import {HTTPError} from "ky";
+import {IVisit} from "../../interfaces/IVisit";
 
-const visitsService = {
+export const visitsService = {
     createVisit: async (req: ICreateVisitRequest): Promise<ICreateVisitResponse> => {
         const result = await client.post('visits', {
             json: req,
@@ -12,6 +13,11 @@ const visitsService = {
 
         return result.json()
     },
+    fetchVisits: async (): Promise<IVisit[]> => {
+        const result = await client.get('visits')
+
+        return result.json()
+    }
 }
 
 

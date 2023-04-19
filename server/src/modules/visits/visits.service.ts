@@ -22,12 +22,32 @@ export class VisitsService {
   }
 
   async findAllByTeacher(teacherId: string) {
-    return this.visitModel
+    const modelResult = await this.visitModel
       .find({
         teacher: teacherId,
-      })
+      }, )
       .populate('lesson')
-      .populate('students');
+      .populate('students').limit(10);
+
+    const result = modelResult.map(item => ({
+      id: item._id,
+      date: item.date,
+      key: item.key,
+      lesson: item.lesson ? {
+        id: item.lesson._id,
+        name: item.lesson.name,
+        group: item.lesson.group,
+        course: item.lesson.course
+      }: item.lesson,
+      students: item.students.map(student => ({
+        role: student.role,
+        id: student._id,
+        name: student.name,
+        group: student.group,
+        course: student.course
+      }))
+    }))
+    return result
   }
 
   async findOneById(id: string) {
