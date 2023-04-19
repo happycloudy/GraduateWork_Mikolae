@@ -14,10 +14,10 @@ import {visitsService} from "../../services/visits/visits.service";
 const TeacherHome = () => {
     const isAuth = useUserStore(state => state.isAuth)
     const lessons = useUserStore(state => state.lessons)
-    const visits = useUserStore(state => state.visits)
+    // const visits = useUserStore(state => state.visits)
     const initVisits = useUserStore(state => state.initVisits)
     const logout = useUserStore(state => state.logout)
-    const {data, isSuccess} = useQuery('get-visits', visitsService.fetchVisits)
+    const {data, isSuccess} = useQuery('get-visits-data', visitsService.fetchVisits)
     const navigate = useNavigate()
 
     const handleLogout = () => {
@@ -49,13 +49,13 @@ const TeacherHome = () => {
                             </Col>
                             <Col offset={3}>
                                 <ListCard title={'Мои занятия (последние 10)'}
-                                          items={visits.map(item => ({
+                                          items={data?.map(item => ({
                                               name: item.lesson?.name ||
                                                   'Неизвестный предмет' + ' ' +
                                                   (new Date(item.date)).toLocaleDateString(),
                                               id: item.id,
                                               copyContent: item.key
-                                          }))}
+                                          })) || []}
                                           withCopyContent/>
                             </Col>
                             <Col offset={3}>

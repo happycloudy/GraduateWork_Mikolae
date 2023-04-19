@@ -1,10 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Visit, VisitDocument } from '../../schemas/visit.schema';
-import { Model } from 'mongoose';
-import { CreateVisitDto } from './dto/create-visit.dto';
-import { SubscribeStudentDto } from './dto/subscribe-student.dto';
-import { StudentsService } from '../students/students.service';
+import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
+import {InjectModel} from '@nestjs/mongoose';
+import {Visit, VisitDocument} from '../../schemas/visit.schema';
+import {Model} from 'mongoose';
+import {CreateVisitDto} from './dto/create-visit.dto';
+import {SubscribeStudentDto} from './dto/subscribe-student.dto';
+import {StudentsService} from '../students/students.service';
 
 @Injectable()
 export class VisitsService {
@@ -28,8 +28,8 @@ export class VisitsService {
       }, )
       .populate('lesson')
       .populate('students').limit(10);
-
-    const result = modelResult.map(item => ({
+    console.log('Длина visits ' + modelResult.length)
+    return modelResult.map(item => ({
       id: item._id,
       date: item.date,
       key: item.key,
@@ -38,7 +38,7 @@ export class VisitsService {
         name: item.lesson.name,
         group: item.lesson.group,
         course: item.lesson.course
-      }: item.lesson,
+      } : item.lesson,
       students: item.students.map(student => ({
         role: student.role,
         id: student._id,
@@ -47,7 +47,6 @@ export class VisitsService {
         course: student.course
       }))
     }))
-    return result
   }
 
   async findOneById(id: string) {

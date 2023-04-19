@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {AutoComplete, Button, DatePicker, Form, Input, Typography} from "antd";
+import {AutoComplete, Button, DatePicker, Form, Input, notification, Typography} from "antd";
 import {ICreateVisit} from "../../interfaces/createVisit.interface";
 import {useCreateVisitMutation} from "../../../../services/visits/visits.service";
 import {useAutocompleteLesson} from "../../../../services/lessons/lessons.service";
@@ -17,10 +17,13 @@ export const CreateVisitForm = () => {
     const autocomplete = useAutocompleteLesson()
     const createVisit = useCreateVisitMutation()
     const teacherId = useUserStore(state => state.id)
+    const [api, contextHolder] = notification.useNotification();
 
     const handleFinish = (result: ICreateVisit) => {
         const lessonId = lessonsOptions.find(
-            item => item.name === result.lessonId.split('|')[0]
+            item =>
+                item.name === result.lessonId.split('|')[0] &&
+                item.group === result.lessonId.split('|')[1]
         )!.id
 
         const date = +result.date.$d
@@ -33,6 +36,8 @@ export const CreateVisitForm = () => {
         })
     }
 
+    const openNotificationWithIcon = (title: string) => api.success({message: title});
+
     const handleSearch = (text: string) => {
         autocomplete.mutate(text)
     }
@@ -43,8 +48,15 @@ export const CreateVisitForm = () => {
         }
     }, [autocomplete.isSuccess])
 
+    useEffect(() => {
+        if(createVisit.isSuccess) {
+            openNotificationWithIcon('Занятие создано!')
+        }
+    }, [createVisit.isSuccess])
+
     return (
         <Form layout={'vertical'} onFinish={handleFinish} initialValues={{key: initialKey}}>
+            {contextHolder}
             <Typography.Title level={3}>
                 Создать занятие
             </Typography.Title>

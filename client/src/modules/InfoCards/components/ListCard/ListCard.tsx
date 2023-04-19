@@ -36,6 +36,10 @@ export const ListCard = ({title = '', items = [], withLinks, withCopyContent}: I
                 size="large"
                 bordered
                 dataSource={items}
+                style={{
+                    height: 300,
+                    overflow: 'auto'
+                }}
                 renderItem={(item) => (
                     <List.Item>
                         {item.name}
