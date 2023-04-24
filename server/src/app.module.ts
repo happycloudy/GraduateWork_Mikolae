@@ -11,6 +11,8 @@ import { configuration } from '../config/configuration';
 import { VisitsModule } from './modules/visits/visits.module';
 import { AutocompleteModule } from './modules/autocomplete/autocomplete.module';
 import { MockModule } from './modules/mock/mock.module';
+import * as process from 'process';
+import * as path from 'path';
 
 @Module({
   imports: [
@@ -26,7 +28,12 @@ import { MockModule } from './modules/mock/mock.module';
     }),
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `${process.cwd()}/config/env/.env.${process.env.NODE_ENV}`,
+      envFilePath: path.resolve(
+        process.cwd(),
+        'config',
+        'env',
+        `.env.${process.env.NODE_ENV}`,
+      ),
       load: [configuration],
     }),
     StudentsModule,
