@@ -5,7 +5,7 @@ import {useUserStore} from "../stores/user/user.store";
 export const queryClient = new QueryClient()
 
 
-const baseUrl = 'http://localhost:30'
+const baseUrl = 'http://localhost:3001/api'
 
 export const client = ky.create({
     prefixUrl: baseUrl,

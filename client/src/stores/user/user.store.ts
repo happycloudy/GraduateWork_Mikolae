@@ -54,7 +54,8 @@ export const useUserStore = create<IUserStore>()(
                     course: -1,
                     role: Roles.Student,
                     accessToken: '',
-                    isAuth: false
+                    isAuth: false,
+                    visits: []
                 }),
                 initVisits: (visits: IVisit[]) => set({visits})
             }),

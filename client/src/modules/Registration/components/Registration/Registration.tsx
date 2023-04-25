@@ -83,7 +83,7 @@ const Registration = () => {
                             value: lesson
                         }))}
                         onSearch={handleSearch}
-                        placeholder="Предмет"
+                        placeholder="Группа"
                     />
                 </Form.Item>
 

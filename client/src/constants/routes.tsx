@@ -5,22 +5,13 @@ import Login from "../pages/login/Login";
 import {Navigate} from "react-router-dom";
 import StudentRegistration from "../pages/studentRegistration/StudentRegistration";
 import TeacherKey from "../pages/teacherKey/TeacherKey";
+import {AuthRoute} from "../modules/Auth";
 
 export const routes: IRoute[] = [
-    {
-        name: 'Отметиться на паре',
-        path: '/student',
-        element: <Student/>
-    },
     {
         name: 'Главная',
         path: '/login',
         element: <Login/>
-    },
-    {
-        name: 'Главная',
-        path: '/',
-        element: <Navigate to={'/login'}/>
     },
     {
         name: 'Регистрация студента',
@@ -28,13 +19,23 @@ export const routes: IRoute[] = [
         element: <StudentRegistration/>
     },
     {
+        name: 'Отметиться на паре',
+        path: '/student',
+        element: <AuthRoute><Student/></AuthRoute>
+    },
+    {
         name: 'Панель преподавателя',
         path: '/teacher/home',
-        element: <TeacherHome/>
+        element: <AuthRoute><TeacherHome/></AuthRoute>
     },
     {
         name: 'Панель преподавателя',
         path: '/teacher/lessons',
-        element: <TeacherKey/>
+        element: <AuthRoute><TeacherKey/></AuthRoute>
+    },
+    {
+        name: 'Главная',
+        path: '/',
+        element: <Navigate to={'/login'}/>
     },
 ]
