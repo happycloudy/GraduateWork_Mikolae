@@ -11,4 +11,9 @@ export class AppController {
   getHello(): string {
     return this.appService.Ping();
   }
+
+  @Get('/auth')
+  checkAuth() {
+    return this.appService.checkAuth();
+  }
 }

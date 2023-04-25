@@ -9,7 +9,7 @@ import {ILoginTeacherResponse} from "./interfaces/LoginTeacherResponse.interface
 import {ISubscribeVisitRequest} from "./interfaces/SubscribeVisitRequest.interface";
 import {ISubscribeVisitResponse} from "./interfaces/SubscribeVisitResponse.interface";
 
-const usersService = {
+export const usersService = {
     loginStudent: async (uuid: string): Promise<ILoginStudentResponse> => {
         const result = await client.post('students/signin', {
             json: {
@@ -40,6 +40,12 @@ const usersService = {
         const result = await client.patch('visits/subscribeStudent', {
             json: req,
         })
+
+        return result.json()
+    },
+
+    checkAuth: async (): Promise<ILoginTeacherResponse> => {
+        const result = await client.get('auth')
 
         return result.json()
     },

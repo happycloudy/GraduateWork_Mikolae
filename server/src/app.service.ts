@@ -5,4 +5,10 @@ export class AppService {
   Ping(): string {
     return 'Pong!';
   }
+
+  checkAuth() {
+    return {
+      auth: true,
+    };
+  }
 }

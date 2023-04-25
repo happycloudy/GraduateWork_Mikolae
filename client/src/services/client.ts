@@ -32,7 +32,6 @@ export const client = ky.create({
                             }
                         }
                     }
-
                 }
 
                 return error;

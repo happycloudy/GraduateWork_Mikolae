@@ -1,10 +1,10 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
-import {InjectModel} from '@nestjs/mongoose';
-import {Visit, VisitDocument} from '../../schemas/visit.schema';
-import {Model} from 'mongoose';
-import {CreateVisitDto} from './dto/create-visit.dto';
-import {SubscribeStudentDto} from './dto/subscribe-student.dto';
-import {StudentsService} from '../students/students.service';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Visit, VisitDocument } from '../../schemas/visit.schema';
+import { Model } from 'mongoose';
+import { CreateVisitDto } from './dto/create-visit.dto';
+import { SubscribeStudentDto } from './dto/subscribe-student.dto';
+import { StudentsService } from '../students/students.service';
 
 @Injectable()
 export class VisitsService {
@@ -25,28 +25,30 @@ export class VisitsService {
     const modelResult = await this.visitModel
       .find({
         teacher: teacherId,
-      }, )
+      })
       .populate('lesson')
-      .populate('students').limit(10);
-    console.log('Длина visits ' + modelResult.length)
-    return modelResult.map(item => ({
+      .populate('students')
+      .limit(10);
+    return modelResult.map((item) => ({
       id: item._id,
       date: item.date,
       key: item.key,
-      lesson: item.lesson ? {
-        id: item.lesson._id,
-        name: item.lesson.name,
-        group: item.lesson.group,
-        course: item.lesson.course
-      } : item.lesson,
-      students: item.students.map(student => ({
+      lesson: item.lesson
+        ? {
+            id: item.lesson._id,
+            name: item.lesson.name,
+            group: item.lesson.group,
+            course: item.lesson.course,
+          }
+        : item.lesson,
+      students: item.students.map((student) => ({
         role: student.role,
         id: student._id,
         name: student.name,
         group: student.group,
-        course: student.course
-      }))
-    }))
+        course: student.course,
+      })),
+    }));
   }
 
   async findOneById(id: string) {
