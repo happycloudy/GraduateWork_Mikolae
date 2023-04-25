@@ -16,7 +16,6 @@ function App() {
     useEffect(() => {
         setUUID()
         usersService.checkAuth().catch(err => {
-            console.dir(err)
             openNotificationWithIcon('Авторизация закончилась, авторизуйтесь снова')
             logout()
         })
