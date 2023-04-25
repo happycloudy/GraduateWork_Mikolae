@@ -4,8 +4,9 @@ import {useUserStore} from "../stores/user/user.store";
 
 export const queryClient = new QueryClient()
 
-
-const baseUrl = 'http://localhost:3001/api'
+// DEV ONLY
+// const baseUrl = 'http://localhost:3001/api'
+const baseUrl = 'https://graduatework.run-eu-central1.goorm.site/api'
 
 export const client = ky.create({
     prefixUrl: baseUrl,

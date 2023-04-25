@@ -20,7 +20,7 @@ export class TeachersController {
     this.teachersService.create({
       name: 'admin',
       username: 'admin',
-      password: '123456',
+      password: 'sfg34tefgsdfgf3w4t45grsgtg23',
     });
   }
 
