@@ -8,9 +8,10 @@ import {ILoginTeacherRequest} from "./interfaces/LoginTeacherRequest.interface";
 import {ILoginTeacherResponse} from "./interfaces/LoginTeacherResponse.interface";
 import {ISubscribeVisitRequest} from "./interfaces/SubscribeVisitRequest.interface";
 import {ISubscribeVisitResponse} from "./interfaces/SubscribeVisitResponse.interface";
+import {UserStudentDto} from "../../stores/user/interfaces/user-student-dto";
 
 export const usersService = {
-    loginStudent: async (uuid: string): Promise<ILoginStudentResponse> => {
+    loginStudent: async (uuid: string): Promise<UserStudentDto> => {
         const result = await client.post('students/signin', {
             json: {
                 uuid
@@ -53,7 +54,7 @@ export const usersService = {
 
 
 // Hooks
-export const useLoginStudentMutation = () => useMutation<ILoginStudentResponse, HTTPError, string>(usersService.loginStudent)
+export const useLoginStudentMutation = () => useMutation<UserStudentDto, HTTPError, string>(usersService.loginStudent)
 export const useRegisterStudentMutation = () => useMutation<
     IRegisterStudentResponse,
     HTTPError,

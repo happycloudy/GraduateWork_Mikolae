@@ -1,6 +1,6 @@
 import React from 'react';
 import PageWrap from "../../modules/Helpers/components/PageLayout/PageLayout";
-import Registration from "../../modules/Registration/components/Registration/Registration";
+import {Registration} from "../../modules/Registration";
 import {Button, Row, Space} from "antd";
 import {LeftOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";

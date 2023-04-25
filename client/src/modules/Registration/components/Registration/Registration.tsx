@@ -8,7 +8,7 @@ import {UserOutlined} from '@ant-design/icons';
 import {useNavigate} from "react-router-dom";
 import {useAutocompleteGroup} from "../../../../services/groups/groups.service";
 
-const Registration = () => {
+export const Registration = () => {
     const [groupsOptions, setGroupsOptions] = useState<string[]>([])
     const uuid = useUserStore(state => state.uuid)
     const [api, contextHolder] = notification.useNotification();
@@ -98,5 +98,3 @@ const Registration = () => {
         </Space>
     );
 };
-
-export default Registration;
