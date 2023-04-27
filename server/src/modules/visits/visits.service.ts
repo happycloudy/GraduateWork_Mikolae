@@ -55,7 +55,8 @@ export class VisitsService {
     return this.visitModel
       .findById(id)
       .populate('teacher', ['_id', 'role', 'name'])
-      .populate('lesson');
+      .populate('lesson')
+      .populate('students');
   }
 
   async findOneByKey(key: string) {
