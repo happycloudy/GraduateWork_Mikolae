@@ -14,6 +14,7 @@ export interface IUserStore {
     role: Roles
     accessToken: string
     isAuth: boolean
+    isLocationAccessed: boolean
 
     lessons: ILesson[]
     visits: IVisit[]
@@ -24,4 +25,5 @@ export interface IUserStore {
     setTeacher: (studentData: UserTeacherDto) => void
     logout: () => void
     initVisits: (visits: IVisit[]) => void
+    setLocationAccess: (isLocationAccessed: boolean) => void
 }

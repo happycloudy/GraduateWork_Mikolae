@@ -10,7 +10,7 @@ import {IVisit} from "../../interfaces/IVisit";
 export const useUserStore = create<IUserStore>()(
     devtools(
         persist(
-            (set,get) => ({
+            (set, get) => ({
                 id: '',
                 uuid: '',
                 name: '',
@@ -20,6 +20,7 @@ export const useUserStore = create<IUserStore>()(
                 role: Roles.Student,
                 accessToken: '',
                 isAuth: false,
+                isLocationAccessed: false,
 
                 lessons: [],
                 visits: [],
@@ -57,7 +58,8 @@ export const useUserStore = create<IUserStore>()(
                     isAuth: false,
                     visits: []
                 }),
-                initVisits: (visits: IVisit[]) => set({visits})
+                initVisits: (visits: IVisit[]) => set({visits}),
+                setLocationAccess: (isLocationAccessed) => set({isLocationAccessed})
             }),
             {
                 name: 'user-store'
