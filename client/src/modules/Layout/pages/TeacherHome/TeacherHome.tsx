@@ -4,12 +4,11 @@ import { LogoutOutlined } from '@ant-design/icons';
 import { useUserStore } from '../../../../stores/user/user.store';
 import { useNavigate } from 'react-router-dom';
 import { Container } from '../../components/Container/Container';
-import { StudentsGroupTable } from '../../../OLD_StudentsGroupTable';
 import { useQuery } from 'react-query';
 import { visitsService } from '../../../../services/visits/visits.service';
 import { Layout } from '../../components/Layout/Layout';
 import { Sidebar } from '../../components/Sidebar/Sidebar';
-import { ListCard } from '../../../Teacher';
+import { GroupTableSection, ListCard } from '../../../Teacher';
 import { LastLessonCard } from '../../../Teacher';
 
 export const TeacherHome = () => {
@@ -64,7 +63,7 @@ export const TeacherHome = () => {
               </Col>
             </Row>
             <Row>
-              <StudentsGroupTable />
+              <GroupTableSection />
             </Row>
           </Space>
         </Container>

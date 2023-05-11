@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {Button, Form, Input, notification, Space, Typography} from "antd";
-import {ISubscribeVisit} from "../../interfaces/subscribeVisit.interface";
 import {useSubscribeVisitMutation} from "../../../../services/users/users.service";
 import {useUserStore} from "../../../../stores/user/user.store";
 
@@ -11,7 +10,7 @@ export const SubscribeVisit = () => {
     const mutation = useSubscribeVisitMutation()
 
 
-    const handleFinish = (result: ISubscribeVisit) => {
+    const handleFinish = (result: any) => {
         mutation.mutate({
             ...result,
             id: id,

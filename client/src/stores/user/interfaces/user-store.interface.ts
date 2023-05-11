@@ -1,8 +1,8 @@
 import {UserStudentDto} from "./user-student-dto";
-import {Roles} from "../../../modules/OLD_Login/enums/loginType.enum";
 import {UserTeacherDto} from "./user-teacher-dto";
 import {ILesson} from "../../../interfaces/ILesson";
 import {IVisit} from "../../../interfaces/IVisit";
+import { Roles } from '../../../modules/Auth';
 
 export interface IUserStore {
     id: string
