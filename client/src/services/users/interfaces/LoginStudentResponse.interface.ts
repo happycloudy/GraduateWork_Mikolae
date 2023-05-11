@@ -1,4 +1,4 @@
-import {Roles} from "../../../modules/Login/enums/loginType.enum";
+import {Roles} from "../../../modules/OLD_Login/enums/loginType.enum";
 import {ILoginResponse} from "./LoginResponse";
 
 export interface ILoginStudentResponse extends ILoginResponse{

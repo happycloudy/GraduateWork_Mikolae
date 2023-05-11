@@ -1,5 +1,5 @@
 import {UserStudentDto} from "./user-student-dto";
-import {Roles} from "../../../modules/Login/enums/loginType.enum";
+import {Roles} from "../../../modules/OLD_Login/enums/loginType.enum";
 import {UserTeacherDto} from "./user-teacher-dto";
 import {ILesson} from "../../../interfaces/ILesson";
 import {IVisit} from "../../../interfaces/IVisit";

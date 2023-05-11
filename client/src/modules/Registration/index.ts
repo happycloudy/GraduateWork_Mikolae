@@ -1,1 +1,0 @@
-export {Registration} from './components/Registration/Registration'

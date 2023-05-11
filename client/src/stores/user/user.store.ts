@@ -3,9 +3,9 @@ import {devtools, persist} from "zustand/middleware";
 import {IUserStore} from "./interfaces/user-store.interface";
 import {getUUIDAsync} from "../../helpers/getUUIDAsync";
 import {UserStudentDto} from "./interfaces/user-student-dto";
-import {Roles} from "../../modules/Login/enums/loginType.enum";
 import {UserTeacherDto} from "./interfaces/user-teacher-dto";
 import {IVisit} from "../../interfaces/IVisit";
+import { Roles } from '../../modules/Auth/enums/loginType.enum';
 
 export const useUserStore = create<IUserStore>()(
     devtools(

@@ -29,7 +29,6 @@ function App() {
             }
         })
     }, [])
-    console.log(!!import.meta.env.VITE_IGNORE_LOCATION || isLocationAccessed )
 
     return (
         <Layout style={{height: "100vh"}}>
