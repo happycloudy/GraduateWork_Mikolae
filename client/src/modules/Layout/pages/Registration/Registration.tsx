@@ -11,7 +11,7 @@ export const Registration = () => {
     const handlePrevPage = () => navigate('/login', {replace: true})
 
     return (
-        <Layout>
+        <Layout style={{height: '100vh'}}>
             <Row align={'middle'} justify={'center'} style={{height: '100%'}}>
                 <Space direction={'vertical'} size={'large'}>
                     <Row justify={"center"}>

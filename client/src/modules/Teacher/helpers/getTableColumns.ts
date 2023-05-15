@@ -5,10 +5,10 @@ export const getTableColumns = (dates: string[]) => {
       dataIndex: 'id',
       key: 'id',
     },
-    ...dates.map(item => ({
-      title: item,
+    ...dates.map((item, ind) => ({
+      title: ind === 0 ? item : new Date(item).toLocaleDateString(),
       dataIndex: item,
       key: item,
-    }))
-  ]
-}
+    })),
+  ];
+};

@@ -5,7 +5,7 @@ import { Layout } from '../../components/Layout/Layout';
 
 export const Login = () => {
   return (
-    <Layout>
+    <Layout style={{height: '100vh'}}>
       <Row align={'middle'} justify={'center'} style={{ height: '100%' }}>
         <Space direction={'vertical'} size={'large'}>
           <Row justify={'center'}>

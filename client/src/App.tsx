@@ -31,7 +31,7 @@ function App() {
     }, [])
 
     return (
-        <Layout style={{height: "100vh", minHeight: "100vh"}}>
+        <Layout style={{minHeight: "100vh"}}>
             {contextHolder}
             {
                 !!import.meta.env.VITE_IGNORE_LOCATION || isLocationAccessed ?

@@ -33,7 +33,7 @@ export const CreateVisitForm = () => {
             key: result.key,
             teacherId: teacherId,
             lessonId: lessonId,
-            date: date | Date.now()
+            date: date || Date.now()
         })
     }
 

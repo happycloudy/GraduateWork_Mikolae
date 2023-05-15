@@ -18,7 +18,7 @@ export const Student = () => {
 
 
   return (
-    <Layout>
+    <Layout style={{height: '100vh'}}>
       <Row align={'middle'} justify={'center'} style={{ height: '100%' }}>
         <Col>
           <StudentInfo />
