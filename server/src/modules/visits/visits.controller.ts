@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Patch, Post, Req } from '@nestjs/common';
 import { CreateVisitDto } from './dto/create-visit.dto';
 import { VisitsService } from './visits.service';
 import { SubscribeStudentDto } from './dto/subscribe-student.dto';
+import { FilterDto } from './dto/filter.dto';
 
 @Controller('visits')
 export class VisitsController {
@@ -25,5 +26,10 @@ export class VisitsController {
   @Patch('/subscribeStudent/')
   subscribeStudent(@Body() dto: SubscribeStudentDto) {
     return this.visitsService.subscribeStudent(dto);
+  }
+
+  @Post('/table')
+  findGroupVisits(@Body() filter: FilterDto) {
+    return this.visitsService.findAllByFilter(filter)
   }
 }

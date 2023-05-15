@@ -5,13 +5,15 @@ import { Model } from 'mongoose';
 import { CreateVisitDto } from './dto/create-visit.dto';
 import { SubscribeStudentDto } from './dto/subscribe-student.dto';
 import { StudentsService } from '../students/students.service';
+import { FilterDto } from './dto/filter.dto';
 
 @Injectable()
 export class VisitsService {
   constructor(
     @InjectModel(Visit.name) private visitModel: Model<VisitDocument>,
     private readonly studentsService: StudentsService,
-  ) {}
+  ) {
+  }
 
   async create(dto: CreateVisitDto) {
     return await this.visitModel.create({
@@ -35,11 +37,11 @@ export class VisitsService {
       key: item.key,
       lesson: item.lesson
         ? {
-            id: item.lesson._id,
-            name: item.lesson.name,
-            group: item.lesson.group,
-            course: item.lesson.course,
-          }
+          id: item.lesson._id,
+          name: item.lesson.name,
+          group: item.lesson.group,
+          course: item.lesson.course,
+        }
         : item.lesson,
       students: item.students.map((student) => ({
         role: student.role,
@@ -95,5 +97,34 @@ export class VisitsService {
         HttpStatus.FORBIDDEN,
       );
     }
+  }
+
+  async findAllByFilter(filter: FilterDto) {
+    const visits = await this.visitModel.find()
+      .populate('lesson', ['name', 'group'])
+      .populate('students', ['name', '_id']);
+
+    const filteredVisits = visits.filter(visit => {
+      return (
+        visit.lesson &&
+        filter.lesson === visit.lesson.name &&
+        filter.group === visit.lesson.group
+      );
+    });
+
+    const students = await this.studentsService.findOneByGroup(filter.group);
+
+    const columns = ['ФИО', ...filteredVisits.map(visit => visit.date)];
+
+    const rows = students.map(student => [
+      student.name,
+      ...filteredVisits.map(
+        visit => !!visit.students.find(
+          visitStudent => visitStudent._id.toString() === student._id.toString(),
+        ),
+      ),
+    ]);
+
+    return {rows, columns};
   }
 }

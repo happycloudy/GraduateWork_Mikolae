@@ -28,6 +28,12 @@ export class StudentsService {
     });
   }
 
+  async findOneByGroup(group: string) {
+    return this.studentModel.find({
+      group: group
+    })
+  }
+
   async signIn(student: any) {
     const payload = { username: student.name, sub: student._id };
     return {

@@ -1,28 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AutoComplete, Button, Form, Space } from 'antd';
 import { IAutocomplete } from '../../interfaces/IAutocomplete';
+import { IFetchTableRequest } from '../../../../services/visits/interfaces/IFetchTableRequest';
+import { useAutocompleteGroup } from '../../../../services/groups/groups.service';
+import { useAutocompleteLesson } from '../../../../services/lessons/lessons.service';
 
-const groups = [{ value: 'КС-24' }, { value: 'КС-34' }, { value: 'КС-44' }];
-const lessons = [{ value: 'Веб программирование' }, { value: 'Операционные сети' }, { value: 'МИИ' }];
+interface IProps {
+  fetch: (data: IFetchTableRequest) => void;
+}
 
-const GroupSearch = () => {
-  const [groupSuggestions, setGroupSuggestions] = useState<IAutocomplete[]>([]);
-  const [lessonSuggestions, setLessonSuggestions] = useState<IAutocomplete[]>([]);
+const GroupSearch = ({ fetch }: IProps) => {
+  const [groups, setGroups] = useState<IAutocomplete[]>([]);
+  const [lessons, setLessons] = useState<IAutocomplete[]>([]);
+  const groupsMutation = useAutocompleteGroup();
+  const lessonsMutation = useAutocompleteLesson();
 
+  const handleSearchGroup = (text: string) => groupsMutation.mutate(text);
+  const handleSearchLessons = (text: string) => lessonsMutation.mutate(text);
 
-  const handleSearchGroup = (text: string) => setGroupSuggestions(() => {
-    const suggestions = groups.map(item => item.value.includes(text) && item).filter(item => item !== false);
-    return suggestions as IAutocomplete[];
-  });
+  const handleFinish = (data: IFetchTableRequest) => fetch(data);
 
-  const handleSearchLessons = (text: string) => setLessonSuggestions(() => {
-    const suggestions = lessons.map(item => item.value.includes(text) && item).filter(item => item !== false);
-    return suggestions as IAutocomplete[];
-  });
+  useEffect(() => {
+    if (groupsMutation.isSuccess) {
+      setGroups(groupsMutation.data.groups.map(group => ({
+        value: group,
+      })));
+    }
+  }, [groupsMutation.isSuccess]);
 
-  const handleFinish = (data: any) => {
-    console.log(data);
-  };
+  useEffect(() => {
+    if (lessonsMutation.isSuccess) {
+      setLessons(lessonsMutation.data
+        .map(lesson => ({
+          value: lesson.name,
+        })));
+    }
+  }, [lessonsMutation.isSuccess]);
 
   return (
     <Space size={'large'}>
@@ -30,7 +43,7 @@ const GroupSearch = () => {
         <Space>
           <Form.Item name={'group'}>
             <AutoComplete style={{ width: 200 }}
-                          options={groupSuggestions}
+                          options={groups}
                           placeholder={'Группа'}
                           onSearch={handleSearchGroup}
             />
@@ -38,7 +51,7 @@ const GroupSearch = () => {
 
           <Form.Item name={'lesson'}>
             <AutoComplete style={{ width: 200 }}
-                          options={lessonSuggestions}
+                          options={lessons}
                           placeholder={'Предмет'}
                           onSearch={handleSearchLessons}
             />
