@@ -4,6 +4,7 @@ import { IAutocomplete } from '../../interfaces/IAutocomplete';
 import { IFetchTableRequest } from '../../../../services/visits/interfaces/IFetchTableRequest';
 import { useAutocompleteGroup } from '../../../../services/groups/groups.service';
 import { useAutocompleteLesson } from '../../../../services/lessons/lessons.service';
+import { uniqueLessons } from '../../helpers/uniqueLessons';
 
 interface IProps {
   fetch: (data: IFetchTableRequest) => void;
@@ -30,10 +31,12 @@ const GroupSearch = ({ fetch }: IProps) => {
 
   useEffect(() => {
     if (lessonsMutation.isSuccess) {
-      setLessons(lessonsMutation.data
+      const filteredLessons = uniqueLessons(lessonsMutation.data
         .map(lesson => ({
           value: lesson.name,
-        })));
+        })))
+      console.log(filteredLessons);
+      setLessons(filteredLessons);
     }
   }, [lessonsMutation.isSuccess]);
 
