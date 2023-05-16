@@ -16,8 +16,15 @@ export const routes: IRoute[] = [
   },
   {
     name: 'Отметиться на паре',
-    path: '/student',
+    path: '/student/',
     element: <WithAuth><Student /></WithAuth>,
+    children: [
+      {
+        name: 'Отметиться на паре',
+        path: ':key',
+        element: <WithAuth><Student /></WithAuth>
+      }
+    ]
   },
   {
     name: 'Панель преподавателя',
