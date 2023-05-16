@@ -14,10 +14,9 @@ import { LastLessonCard } from '../../../Teacher';
 export const TeacherHome = () => {
   const isAuth = useUserStore(state => state.isAuth);
   const lessons = useUserStore(state => state.lessons);
-  // const visits = useUserStore(state => state.visits)
   const initVisits = useUserStore(state => state.initVisits);
   const logout = useUserStore(state => state.logout);
-  const { data, isSuccess } = useQuery('get-visits-data', visitsService.fetchVisits);
+  const { data, isSuccess, isFetching } = useQuery('get-visits-data', visitsService.fetchVisits);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -26,10 +25,10 @@ export const TeacherHome = () => {
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && !isFetching) {
       initVisits(data || []);
     }
-  }, [isSuccess]);
+  }, [isSuccess, isFetching]);
 
   return (
     <>
@@ -47,7 +46,7 @@ export const TeacherHome = () => {
                           }))}
                           withLinks />
               </Col>
-              <Col offset={3}>
+              <Col offset={1}>
                 <ListCard title={'Мои занятия (последние 10)'}
                           items={data?.map(item => ({
                             name: item.lesson?.name ||
@@ -58,7 +57,7 @@ export const TeacherHome = () => {
                           })) || []}
                           withCopyContent />
               </Col>
-              <Col offset={3}>
+              <Col offset={1}>
                 <LastLessonCard />
               </Col>
             </Row>

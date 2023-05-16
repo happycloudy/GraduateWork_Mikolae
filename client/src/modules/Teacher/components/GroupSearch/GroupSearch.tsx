@@ -35,7 +35,6 @@ const GroupSearch = ({ fetch }: IProps) => {
         .map(lesson => ({
           value: lesson.name,
         })))
-      console.log(filteredLessons);
       setLessons(filteredLessons);
     }
   }, [lessonsMutation.isSuccess]);

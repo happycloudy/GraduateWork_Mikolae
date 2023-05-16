@@ -8,7 +8,7 @@ export const GroupTableSection = () => {
   const mutation = useFetchTable()
 
   return (
-    <Space direction={'vertical'} size={'large'}>
+    <Space direction={'vertical'} size={'small'}>
       <GroupSearch fetch={mutation.mutate}/>
       <GroupTable columns={mutation.data?.columns} rows={mutation.data?.rows} loading={mutation.isLoading}/>
     </Space>
