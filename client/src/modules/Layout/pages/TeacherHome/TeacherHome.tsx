@@ -38,15 +38,15 @@ export const TeacherHome = () => {
         <Container>
           <Space size={'large'} direction={'vertical'} style={{ width: '100%' }}>
             <Row style={{ width: '100%' }}>
+              {/*<Col>*/}
+              {/*  <ListCard title={'Мои предметы'}*/}
+              {/*            items={lessons.map(item => ({*/}
+              {/*              name: item.name,*/}
+              {/*              id: item.id,*/}
+              {/*            }))}*/}
+              {/*            withLinks />*/}
+              {/*</Col>*/}
               <Col>
-                <ListCard title={'Мои предметы'}
-                          items={lessons.map(item => ({
-                            name: item.name,
-                            id: item.id,
-                          }))}
-                          withLinks />
-              </Col>
-              <Col offset={1}>
                 <ListCard title={'Мои занятия (последние 10)'}
                           items={data?.map(item => ({
                             name: item.lesson?.name ||

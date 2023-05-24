@@ -9,11 +9,11 @@ const TeacherInfo = () => {
             <Typography.Title level={2} style={{textAlign: 'center'}}>
                 {name}
             </Typography.Title>
-            <Row justify={"center"}>
-                <Typography.Text>
-                    Всего дисциплин 10
-                </Typography.Text>
-            </Row>
+            {/*<Row justify={"center"}>*/}
+            {/*    <Typography.Text>*/}
+            {/*        Всего дисциплин 10*/}
+            {/*    </Typography.Text>*/}
+            {/*</Row>*/}
         </Space>
     );
 };
