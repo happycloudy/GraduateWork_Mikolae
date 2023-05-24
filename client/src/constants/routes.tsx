@@ -1,41 +1,44 @@
-import {IRoute} from "../interfaces/IRoute";
-import Student from "../pages/student/Student";
-import TeacherHome from "../pages/teacherHome/TeacherHome";
-import Login from "../pages/login/Login";
-import {Navigate} from "react-router-dom";
-import StudentRegistration from "../pages/studentRegistration/StudentRegistration";
-import TeacherKey from "../pages/teacherKey/TeacherKey";
-import {AuthRoute} from "../modules/Auth";
+import { IRoute } from '../interfaces/IRoute';
+import { Navigate } from 'react-router-dom';
+import { WithAuth } from '../modules/Auth';
+import { Login, Registration, Student, TeacherHome, CreateVisit } from '../modules/Layout';
 
 export const routes: IRoute[] = [
-    {
-        name: 'Главная',
-        path: '/login',
-        element: <Login/>
-    },
-    {
-        name: 'Регистрация студента',
-        path: '/registration/student',
-        element: <StudentRegistration/>
-    },
-    {
+  {
+    name: 'Главная',
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    name: 'Регистрация студента',
+    path: '/registration/student',
+    element: <Registration />,
+  },
+  {
+    name: 'Отметиться на паре',
+    path: '/student/',
+    element: <WithAuth><Student /></WithAuth>,
+    children: [
+      {
         name: 'Отметиться на паре',
-        path: '/student',
-        element: <AuthRoute><Student/></AuthRoute>
-    },
-    {
-        name: 'Панель преподавателя',
-        path: '/teacher/home',
-        element: <AuthRoute><TeacherHome/></AuthRoute>
-    },
-    {
-        name: 'Панель преподавателя',
-        path: '/teacher/lessons',
-        element: <AuthRoute><TeacherKey/></AuthRoute>
-    },
-    {
-        name: 'Главная',
-        path: '/',
-        element: <Navigate to={'/login'}/>
-    },
-]
+        path: ':key',
+        element: <WithAuth><Student /></WithAuth>
+      }
+    ]
+  },
+  {
+    name: 'Панель преподавателя',
+    path: '/teacher/home',
+    element: <WithAuth><TeacherHome /></WithAuth>,
+  },
+  {
+    name: 'Панель преподавателя',
+    path: '/teacher/lessons',
+    element: <WithAuth><CreateVisit /></WithAuth>,
+  },
+  {
+    name: 'Главная',
+    path: '/',
+    element: <Navigate to={'/login'} />,
+  },
+];

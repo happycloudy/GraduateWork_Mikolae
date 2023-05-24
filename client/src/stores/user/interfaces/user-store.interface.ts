@@ -1,8 +1,8 @@
 import {UserStudentDto} from "./user-student-dto";
-import {Roles} from "../../../modules/Login/enums/loginType.enum";
 import {UserTeacherDto} from "./user-teacher-dto";
 import {ILesson} from "../../../interfaces/ILesson";
 import {IVisit} from "../../../interfaces/IVisit";
+import { Roles } from '../../../modules/Auth';
 
 export interface IUserStore {
     id: string
@@ -14,6 +14,7 @@ export interface IUserStore {
     role: Roles
     accessToken: string
     isAuth: boolean
+    isLocationAccessed: boolean
 
     lessons: ILesson[]
     visits: IVisit[]
@@ -24,4 +25,5 @@ export interface IUserStore {
     setTeacher: (studentData: UserTeacherDto) => void
     logout: () => void
     initVisits: (visits: IVisit[]) => void
+    setLocationAccess: (isLocationAccessed: boolean) => void
 }

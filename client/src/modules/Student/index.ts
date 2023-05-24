@@ -1,2 +1,2 @@
-export {UserInfo} from './components/StudentInfo/UserInfo'
+export {StudentInfo} from './components/StudentInfo/StudentInfo'
 export {SubscribeVisit} from './components/SubscribeVisit/SubscribeVisit'

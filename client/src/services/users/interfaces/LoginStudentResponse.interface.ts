@@ -1,5 +1,6 @@
-import {Roles} from "../../../modules/Login/enums/loginType.enum";
+
 import {ILoginResponse} from "./LoginResponse";
+import { Roles } from '../../../modules/Auth';
 
 export interface ILoginStudentResponse extends ILoginResponse{
     name: string

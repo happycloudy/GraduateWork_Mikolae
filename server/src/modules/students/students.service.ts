@@ -28,6 +28,12 @@ export class StudentsService {
     });
   }
 
+  async findOneByGroup(group: string) {
+    return this.studentModel.find({
+      group: group
+    })
+  }
+
   async signIn(student: any) {
     const payload = { username: student.name, sub: student._id };
     return {
@@ -42,10 +48,24 @@ export class StudentsService {
 
   async create(createStudentDto: CreateStudentDto) {
     const existingStudent = await this.studentModel.findOne({
-      uuid: createStudentDto.uuid,
+      $or: [
+        {
+          uuid: createStudentDto.uuid,
+        },
+        {
+          name: createStudentDto.name
+        }
+      ]
     });
 
     if (existingStudent) {
+      if(existingStudent.uuid !== createStudentDto.uuid) {
+        throw new HttpException(
+          'Вы зарегистрированы не на этом устройстве',
+          HttpStatus.FORBIDDEN,
+        );
+      }
+
       throw new HttpException(
         'Студент уже зарегистрирован на этом устройстве, вернитесь на страницу входа',
         HttpStatus.FORBIDDEN,
