@@ -13,7 +13,7 @@ export class VisitsController {
     return this.visitsService.create(dto);
   }
 
-  @Get(':id')
+  @Get('/id/:id')
   findOneVisit(@Param('id') id: string) {
     return this.visitsService.findOneById(id);
   }
