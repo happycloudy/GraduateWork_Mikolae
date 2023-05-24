@@ -34,11 +34,11 @@ function App() {
         <Layout style={{minHeight: "100vh"}}>
             {contextHolder}
             {
-                !!import.meta.env.VITE_IGNORE_LOCATION || isLocationAccessed ?
-                    <RouterProvider router={createBrowserRouter(routes)}/> :
-                    <Row align={'middle'} justify={'center'} style={{height: '100vh', width: '100vw'}}>
-                        Попробуйте зайти на сайт с другого места
-                    </Row>
+                // !!import.meta.env.VITE_IGNORE_LOCATION || isLocationAccessed ?
+                    <RouterProvider router={createBrowserRouter(routes)}/>
+                    // <Row align={'middle'} justify={'center'} style={{height: '100vh', width: '100vw'}}>
+                    //     Попробуйте зайти на сайт с другого места
+                    // </Row>
             }
         </Layout>
     )
